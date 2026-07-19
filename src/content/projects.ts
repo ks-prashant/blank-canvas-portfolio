@@ -141,7 +141,7 @@ export const projects: Project[] = [
             },
             "engineer": {
               "depth": "full",
-              "variant": "technical framing — the transitions, not the pitch.",
+              "variant": "Four \"no\"s, four routes: bad-timing → capture callback, never terminal alone; CTA-decline → step down exactly one rung (N5→N7→N8); not-interested → skip straight to classify; hard-stop → immediate DNC exit, suppressed across systems. An objection (\"too costly,\" a question) routes to N9; a decline (a decision) moves down the ladder. The earlier build conflated these two categories, and that conflation is what broke it in both directions simultaneously.",
               "receipt": "the engineer lens gets the full routing table, because the taxonomy is a structure, not a tone note."
             }
           }
@@ -446,8 +446,8 @@ export const projects: Project[] = [
             },
             "engineer": {
               "depth": "full",
-              "variant": "rendered as a pull-quote in the margin, verbatim.",
-              "receipt": "the closing block on the engineer artifact, the same move the site's own thesis (D9) makes about itself."
+              "variant": "\"Every fix in this project came from the same root move: turn an instruction into a structure. … Instructions alone are suggestions a large language model can and will drift from under pressure; structure, transitions that don't exist, variables that gate behavior, node logic that checks prior context, is what actually holds under real, messy phone calls.\" The line that generalizes past this one build: \"don't interrogate\" became a transition condition, \"don't loop\" became a one-way ladder, \"don't sound robotic\" became specific, testable settings.",
+              "receipt": "the closing block on the engineer artifact, rendered as a pull-quote in the margin, verbatim — the same move the site's own thesis (D9) makes about itself."
             }
           }
         }

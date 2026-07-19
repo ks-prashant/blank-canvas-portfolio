@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Prose } from "../../components/prose";
 import { LensReceipt } from "../lens/lens-receipt";
 import type { ComposedBlock } from "../../content/product-essay";
-import type { ContentBlock, Metric } from "../../content/types";
+import type { ContentBlock, Metric, Recording } from "../../content/types";
 import {
   CorpusBar,
   GoldenSetSplit,
@@ -12,6 +12,7 @@ import {
   PipelineDiagram,
   RiskRequirementLedger,
 } from "./block-visuals";
+import { PairedRecordings, StateGraph } from "./automjet-visuals";
 import { EvalScore } from "./eval-score";
 import { IncidentLedger } from "./incident-ledger";
 
@@ -54,6 +55,24 @@ const BLOCK_HEADINGS: Record<string, string> = {
   "gg-21": "The eval budget",
   "gg-22": "The golden set",
   "gg-24": "One user, chosen on purpose",
+  "automjet-01": "What it is",
+  "automjet-02": "The bet: the fallback ladder is the product",
+  "automjet-03": "The four-way no",
+  "automjet-04": "Opening lines branched by lead source",
+  "automjet-05": "Hindi handed off, never faked",
+  "automjet-06": "Compliance as a pre-dial gate",
+  "automjet-07": "The one-way ladder",
+  "automjet-08": "The transition condition is the real instruction",
+  "automjet-09": "The naturalness stack",
+  "automjet-10": "Per-node model routing",
+  "automjet-11": "The post-call record",
+  "automjet-12": "The funnel, and two real calls",
+  "automjet-13": "Cost levers, ranked",
+  "automjet-14": "The conversation-flow graph",
+  "automjet-15": "The paired listen",
+  "automjet-16": "Register: wrong vs. right",
+  "automjet-17": "What was cut",
+  "automjet-18": "What's watched",
 };
 
 const KIND_FALLBACK_HEADING: Record<ContentBlock["kind"], string> = {
@@ -74,8 +93,20 @@ function headingFor(block: ContentBlock, decisionNumber?: number): string | null
   return fallback || null;
 }
 
-function VisualFor({ block, metrics }: { block: ContentBlock; metrics: Metric[] }) {
+function VisualFor({
+  block,
+  metrics,
+  recordings,
+}: {
+  block: ContentBlock;
+  metrics: Metric[];
+  recordings?: Recording[];
+}) {
   switch (block.visual) {
+    case "state-graph":
+      return <StateGraph />;
+    case "paired-recordings":
+      return <PairedRecordings recordings={recordings ?? []} metrics={metrics} />;
     case "eval-score": {
       const evalMetrics = metrics.filter((m) =>
         ["Retrieval gate (GDPR slice)", "Groundedness (first full run)", "Correct-refusal (first full run)", "Citation accuracy (first full run)"].includes(
@@ -113,6 +144,8 @@ function BlockSection({
   bodyOverride,
   decisionNumber,
   metrics,
+  recordings,
+  skipVisual,
 }: {
   block: ContentBlock;
   slug: string;
@@ -120,6 +153,8 @@ function BlockSection({
   bodyOverride?: string;
   decisionNumber?: number;
   metrics: Metric[];
+  recordings?: Recording[];
+  skipVisual?: boolean;
 }) {
   const heading = headingFor(block, decisionNumber);
   const body = bodyOverride ?? block.body;
@@ -134,7 +169,7 @@ function BlockSection({
       <p className="ledger-block-body">
         <Prose text={body} />
       </p>
-      <VisualFor block={block} metrics={metrics} />
+      {skipVisual ? null : <VisualFor block={block} metrics={metrics} recordings={recordings} />}
       {receipt ? <LensReceipt>{receipt}</LensReceipt> : null}
     </section>
   );
@@ -144,12 +179,21 @@ export function BlockRenderer({
   composed,
   slug,
   metrics,
+  recordings,
 }: {
   composed: ComposedBlock[];
   slug: string;
   metrics: Metric[];
+  recordings?: Recording[];
 }) {
   const elements: ReactNode[] = [];
+  // Two blocks can legitimately carry the same `visual` key (e.g. Automjet's
+  // automjet-12 and automjet-15 both point at "paired-recordings" — one is
+  // the funnel framing, one is the transcript-fallback framing, and both
+  // appear in the Recruiter composition). Each block's prose/receipt still
+  // renders every time, but the heavy visual itself renders once per page,
+  // the first time its key is seen, so a signature visual never repeats.
+  const renderedVisuals = new Set<string>();
   let decisionCounter = 0;
   let i = 0;
 
@@ -179,6 +223,9 @@ export function BlockRenderer({
 
     if (block.kind === "decision") decisionCounter += 1;
 
+    const skipVisual = block.visual ? renderedVisuals.has(block.visual) : false;
+    if (block.visual) renderedVisuals.add(block.visual);
+
     elements.push(
       <BlockSection
         block={block}
@@ -187,6 +234,8 @@ export function BlockRenderer({
         bodyOverride={treatment.variant}
         decisionNumber={block.kind === "decision" ? decisionCounter : undefined}
         metrics={metrics}
+        recordings={recordings}
+        skipVisual={skipVisual}
         key={block.id}
       />,
     );

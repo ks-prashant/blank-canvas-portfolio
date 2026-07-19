@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WorkGroundedGovernanceRouteImport } from './routes/work/grounded-governance'
+import { Route as WorkAutomjetRouteImport } from './routes/work/automjet'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,30 +23,39 @@ const WorkGroundedGovernanceRoute = WorkGroundedGovernanceRouteImport.update({
   path: '/work/grounded-governance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WorkAutomjetRoute = WorkAutomjetRouteImport.update({
+  id: '/work/automjet',
+  path: '/work/automjet',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/work/automjet': typeof WorkAutomjetRoute
   '/work/grounded-governance': typeof WorkGroundedGovernanceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/work/automjet': typeof WorkAutomjetRoute
   '/work/grounded-governance': typeof WorkGroundedGovernanceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/work/automjet': typeof WorkAutomjetRoute
   '/work/grounded-governance': typeof WorkGroundedGovernanceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/work/grounded-governance'
+  fullPaths: '/' | '/work/automjet' | '/work/grounded-governance'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/work/grounded-governance'
-  id: '__root__' | '/' | '/work/grounded-governance'
+  to: '/' | '/work/automjet' | '/work/grounded-governance'
+  id: '__root__' | '/' | '/work/automjet' | '/work/grounded-governance'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  WorkAutomjetRoute: typeof WorkAutomjetRoute
   WorkGroundedGovernanceRoute: typeof WorkGroundedGovernanceRoute
 }
 
@@ -65,11 +75,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkGroundedGovernanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/work/automjet': {
+      id: '/work/automjet'
+      path: '/work/automjet'
+      fullPath: '/work/automjet'
+      preLoaderRoute: typeof WorkAutomjetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  WorkAutomjetRoute: WorkAutomjetRoute,
   WorkGroundedGovernanceRoute: WorkGroundedGovernanceRoute,
 }
 export const routeTree = rootRouteImport

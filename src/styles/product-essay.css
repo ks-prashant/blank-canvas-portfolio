@@ -99,6 +99,14 @@
   text-underline-offset: 3px;
 }
 
+/* Recruiter-genre caption (Automjet's "it seemed only fair", §9.2) */
+.ledger-artifact-caption {
+  font-style: italic;
+  font-size: var(--text-13_5);
+  color: var(--ink-soft);
+  margin: 0 0 var(--space-24);
+}
+
 /* ================= SHARED: BlockRenderer (C2) ================= */
 .ledger-block {
   padding: var(--space-24) 0;
@@ -124,6 +132,20 @@
 }
 .ledger-block--decision .ledger-block-heading::before {
   content: "";
+}
+
+/* Quote-kind blocks (e.g. automjet-19's closing line) render as a pull-quote
+ * in the margin, per that block's own engineer-lens receipt — same visual
+ * treatment as ArtifactFrame's verbatim build-plan quote above. */
+.ledger-block--quote .ledger-block-body {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-19);
+  color: var(--ink);
+  border-left: 2px solid var(--rule-strong);
+  padding: var(--space-16) var(--space-24);
+  background: var(--paper-lift);
+  max-width: none;
 }
 
 /* ================= SHARED: EvalScore (C7) ================= */
@@ -412,4 +434,282 @@
   font-size: var(--text-10_5);
   color: var(--ink-faint);
   text-transform: uppercase;
+}
+
+/* ================= AUTOMJET-SPECIFIC visuals ================= */
+
+/* StateGraph (C5) — ordered lists + CSS-drawn edges, no diagram library
+ * (§9.4). Removed edges struck red with a mono REMOVED BY DESIGN label —
+ * the missing edges are the argument, not decoration (§9.4/automjet-14). */
+.ledger-state-graph-wrap {
+  margin: var(--space-16) 0;
+  overflow-x: auto;
+}
+.ledger-state-graph {
+  list-style: none;
+  margin: 0 0 var(--space-24);
+  padding: 0;
+  border-left: 2px solid var(--rule-strong);
+  min-width: 480px;
+}
+.ledger-state-graph-node {
+  padding: var(--space-12) 0 var(--space-12) var(--space-16);
+  border-bottom: 1px solid var(--rule);
+}
+.ledger-state-graph-node:last-child {
+  border-bottom: none;
+}
+.ledger-state-graph-node-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-8);
+  margin: 0 0 var(--space-8);
+}
+.ledger-state-graph-node-id {
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  color: var(--paper);
+  background: var(--ink);
+  padding: 1px 6px;
+  flex: none;
+}
+.ledger-state-graph-node-label {
+  font-size: var(--text-13_5);
+  font-weight: 600;
+  color: var(--ink);
+}
+.ledger-state-graph-edges {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ledger-state-graph-edges li {
+  font-size: var(--text-12);
+  color: var(--ink-soft);
+}
+.ledger-state-graph-arrow {
+  color: var(--ink-faint);
+}
+.ledger-state-graph-edge-to {
+  font-family: var(--font-mono);
+  color: var(--ink);
+}
+.ledger-state-graph-edge-condition {
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+.ledger-state-graph-side {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+  margin-bottom: var(--space-24);
+}
+.ledger-state-graph-side > div {
+  flex: 1 1 240px;
+  min-width: 220px;
+}
+.ledger-state-graph-side-heading {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  margin: 0 0 var(--space-8);
+}
+.ledger-state-graph-side ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--text-12);
+  color: var(--ink);
+}
+.ledger-state-graph-ending-list {
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  gap: var(--space-8) !important;
+}
+.ledger-state-graph-ending-list li {
+  border: 1px solid var(--rule);
+  padding: 2px 8px;
+}
+
+.ledger-state-graph-removed {
+  border-top: 2px solid var(--red);
+  padding-top: var(--space-12);
+}
+.ledger-state-graph-removed-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--red);
+  margin: 0 0 var(--space-8);
+}
+.ledger-state-graph-removed ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ledger-state-graph-removed-edge {
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  color: var(--red);
+}
+.ledger-state-graph-removed-reason {
+  font-family: var(--font-body);
+  font-style: italic;
+  color: var(--ink-faint);
+}
+
+/* AnnotatedTranscript (C4) + PairedRecordings (C3) */
+.ledger-paired-recordings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+  margin: var(--space-16) 0;
+  align-items: flex-start;
+}
+.ledger-paired-recordings-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+  flex: 2 1 480px;
+}
+.ledger-annotated-transcript {
+  flex: 1 1 220px;
+  min-width: 220px;
+  border: 1px solid var(--rule);
+  padding: var(--space-16);
+}
+.ledger-annotated-transcript-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  margin: 0 0 var(--space-12);
+}
+.ledger-annotated-transcript audio {
+  width: 100%;
+  margin-bottom: var(--space-12);
+}
+.ledger-annotated-transcript-fallback {
+  font-size: var(--text-12);
+  color: var(--ink-soft);
+  font-style: italic;
+  margin: 0 0 var(--space-12);
+}
+.ledger-record-fields {
+  margin: 0 0 var(--space-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.ledger-record-field {
+  display: grid;
+  grid-template-columns: minmax(100px, 40%) 1fr;
+  gap: var(--space-8);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.ledger-record-field dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.ledger-record-field dd {
+  font-size: var(--text-12);
+  color: var(--ink);
+  margin: 0;
+}
+.ledger-annotated-transcript-marks {
+  list-style: none;
+  margin: 0 0 var(--space-12);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ledger-annotated-transcript-turn {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  color: var(--ink-soft);
+  margin-right: var(--space-8);
+}
+.ledger-annotated-transcript-node {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  color: var(--paper);
+  background: var(--ink-soft);
+  padding: 1px 5px;
+}
+.ledger-annotated-transcript-note {
+  font-size: var(--text-12);
+  color: var(--ink-soft);
+}
+.ledger-annotated-transcript-gap {
+  font-size: var(--text-12);
+  color: var(--ink-faint);
+  font-style: italic;
+  margin: 0 0 var(--space-12);
+}
+.ledger-annotated-transcript-caveat {
+  font-size: var(--text-11);
+  color: var(--ink-faint);
+  font-style: italic;
+  margin: 0;
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--rule);
+}
+
+.ledger-paired-recordings-funnel {
+  flex: 1 1 200px;
+  min-width: 180px;
+  border-left: 2px solid var(--rule-strong);
+  padding-left: var(--space-16);
+}
+.ledger-paired-recordings-funnel-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  margin: 0 0 var(--space-8);
+}
+.ledger-paired-recordings-funnel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+.ledger-paired-recordings-funnel-value {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-19);
+  color: var(--ink);
+}
+.ledger-paired-recordings-funnel-metric-label {
+  display: block;
+  font-size: var(--text-11);
+  color: var(--ink-soft);
+}
+.ledger-paired-recordings-funnel-caveat {
+  display: block;
+  font-size: var(--text-10_5);
+  color: var(--ink-faint);
+  font-style: italic;
+  margin-top: 2px;
 }
