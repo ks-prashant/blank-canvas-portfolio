@@ -1,0 +1,630 @@
+/*
+ * BUILD-SPEC.md §11 Step 4 — CSS for the six ported landing sections
+ * (journey, work index, principles, numbers/audit, questions, contact).
+ *
+ * Ported from prototype/index.html's JOURNEY/WORK/PRINCIPLES/AUDIT/
+ * QUESTIONS/CONTACT style blocks (lines ~146-254), values kept verbatim,
+ * class names re-namespaced with a `ledger-` prefix to match the naming
+ * convention already established by src/styles.css's layout-shell classes
+ * (`.ledger-grid`, `.ledger-margin-col`, etc — see BUILD-SPEC §11 Step 2).
+ *
+ * NOTE (flagged in the Step 4 report): src/styles.css itself does not yet
+ * contain any of these section-level classes — only the page-shell tokens
+ * and grid survived Step 2's port. This file is new and is loaded via a
+ * plain side-effect import from src/routes/index.tsx, deliberately without
+ * touching src/styles.css, src/fonts.css, or the layout/ components, which
+ * are off-limits for this step.
+ */
+
+/* ================= SECTION SCAFFOLD ================= */
+.ledger-rule-top {
+  border-top: 1px solid var(--rule);
+}
+
+.ledger-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ledger-eyebrow-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink);
+  flex: none;
+}
+
+.ledger-section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.8vw, 44px);
+  font-weight: 400;
+  margin-top: 10px;
+  max-width: 22ch;
+}
+
+.ledger-section-dek {
+  font-size: var(--text-15);
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+/* Per-section two-column grid (narrow annotation margin + content),
+   mirroring the outer page shell's ledger-grid but scoped to one
+   section so each section can carry its own margin annotation, the
+   same way the prototype repeats `.grid` inside every section. */
+.ledger-section-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 36px;
+}
+@media (max-width: 860px) {
+  .ledger-section-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+.ledger-section-margin {
+  padding-top: 4px;
+}
+@media (max-width: 860px) {
+  .ledger-section-margin {
+    display: none;
+  }
+}
+.ledger-section-content {
+  min-width: 0;
+}
+
+/* ================= JOURNEY ================= */
+.ledger-journey-block {
+  padding: 64px 0;
+}
+.ledger-jline {
+  margin-top: 32px;
+  position: relative;
+}
+.ledger-jline-rule {
+  position: absolute;
+  left: 9px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--rule-strong);
+}
+.ledger-jphase {
+  position: relative;
+  padding-left: 34px;
+  margin-bottom: 4px;
+}
+.ledger-jphase-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px 0 10px;
+  position: relative;
+}
+.ledger-jphase-head::before {
+  content: "";
+  position: absolute;
+  left: -29px;
+  top: 22px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.ledger-jn {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+}
+.ledger-jphase-head h4 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+}
+.ledger-jy {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  color: var(--ink-faint);
+  margin-left: auto;
+}
+.ledger-jmarks {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+}
+.ledger-jmark {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  padding: 6px 12px;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.ledger-jmark:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.ledger-jmark[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.ledger-jdetail {
+  display: none;
+  margin: 0 0 18px 34px;
+  padding: 18px 20px;
+  background: var(--paper-lift);
+  border-left: 2px solid var(--ink);
+  max-width: 64ch;
+}
+.ledger-jdetail.open {
+  display: block;
+}
+.ledger-jd-ti {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  color: var(--ink-faint);
+  margin-bottom: 8px;
+}
+.ledger-jdetail p {
+  font-size: var(--text-13_5);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.ledger-jd-nums {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+}
+.ledger-jd-nums span {
+  color: var(--ink);
+}
+.ledger-throughline {
+  margin-top: 36px;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--ink);
+  max-width: 72ch;
+}
+.ledger-tl-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+.ledger-throughline p {
+  font-size: var(--text-15);
+  line-height: 1.65;
+  color: var(--ink);
+}
+.ledger-edu-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 32px;
+}
+@media (max-width: 700px) {
+  .ledger-edu-row {
+    grid-template-columns: 1fr;
+  }
+}
+.ledger-edu-item {
+  background: var(--paper);
+  padding: 16px 18px;
+}
+.ledger-edu-k {
+  font-family: var(--font-mono);
+  font-size: var(--text-9_5);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  display: block;
+  margin-bottom: 6px;
+}
+.ledger-edu-v {
+  font-size: var(--text-13_5);
+  color: var(--ink);
+  line-height: 1.45;
+}
+.ledger-edu-y {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  color: var(--ink-faint);
+  margin-top: 4px;
+}
+
+/* ================= WORK ================= */
+.ledger-work-block {
+  padding: 60px 0;
+}
+.ledger-org-group {
+  margin-top: 6px;
+}
+.ledger-org-head {
+  font-family: var(--font-mono);
+  font-size: var(--text-9_5);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  padding: 24px 0 4px;
+}
+.ledger-work-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 13px 0;
+  border-top: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+}
+.ledger-work-row--nolink {
+  cursor: default;
+}
+.ledger-wr-main {
+  min-width: 0;
+}
+.ledger-work-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+}
+.ledger-work-oneliner {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+.ledger-cta-mark {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+/* tier 1 — visually heavier */
+.ledger-work-row--t1 {
+  padding: 20px 14px;
+  background: linear-gradient(to right, var(--paper-lift), transparent 60%);
+  margin: 0 -14px;
+}
+.ledger-work-row--t1 .ledger-work-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+}
+.ledger-work-row--t1 .ledger-work-oneliner {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+.ledger-work-row--t1 .ledger-cta-mark {
+  color: var(--red);
+  font-size: var(--text-10_5);
+}
+/* tier 3 — quieter, deliberately no CTA at all (§7.4: a missing CTA on
+   Tier 3 is honest; a CTA leading somewhere thin is a small lie) */
+.ledger-work-row--t3 .ledger-work-title {
+  font-weight: 400;
+  color: var(--ink-soft);
+  font-size: var(--text-13_5);
+}
+
+/* ================= PRINCIPLES ================= */
+.ledger-principles-block {
+  padding: 64px 0;
+}
+.ledger-pgroup {
+  margin-top: 34px;
+}
+.ledger-pg-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 8px;
+}
+.ledger-pg-n {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+}
+.ledger-pg-t {
+  font-family: var(--font-display);
+  font-size: 20px;
+}
+.ledger-pitem {
+  border-top: 1px solid var(--rule);
+}
+.ledger-pgroup:last-child .ledger-pitem:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.ledger-phead {
+  width: 100%;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: baseline;
+  padding: 17px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.ledger-pt {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.3;
+  color: var(--ink);
+}
+.ledger-pind {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+.ledger-pitem.open .ledger-pind {
+  color: var(--red);
+}
+.ledger-pbody {
+  display: none;
+  padding: 0 0 20px;
+  max-width: 62ch;
+}
+.ledger-pitem.open .ledger-pbody {
+  display: block;
+}
+.ledger-pbody p {
+  font-size: var(--text-13_5);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.ledger-pchips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.ledger-pchip {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  color: var(--ink-soft);
+  border: 1px solid var(--rule-strong);
+  padding: 3px 9px;
+  display: inline-block;
+}
+
+/* Evidence list — one row per project this principle is proven against.
+   Not in the prototype (its evidence was chips-only); the compiled
+   pipeline carries a full per-project note, so it earns a definition
+   list rather than being dropped on the floor. */
+.ledger-pevidence {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ledger-pevidence-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ledger-pevidence-row dd {
+  font-size: var(--text-13);
+  color: var(--ink-soft);
+  line-height: 1.55;
+  max-width: 60ch;
+  margin: 0;
+}
+
+/* ================= AUDIT / NUMBERS ================= */
+.ledger-numbers-block {
+  padding: 64px 0;
+}
+.ledger-sgroup {
+  margin-top: 30px;
+}
+.ledger-sg-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding-bottom: 6px;
+  flex-wrap: wrap;
+}
+.ledger-sg-t {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+.ledger-sgroup--cost .ledger-sg-t {
+  color: var(--red);
+}
+.ledger-sg-d {
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.ledger-score-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+}
+.ledger-sgroup:last-child .ledger-score-row:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.ledger-sl {
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  color: var(--ink);
+}
+.ledger-sd {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-top: 3px;
+  max-width: 52ch;
+}
+.ledger-sv {
+  font-family: var(--font-mono);
+  font-size: var(--text-17);
+  text-align: right;
+  white-space: nowrap;
+}
+.ledger-sgroup--cost .ledger-sv {
+  color: var(--red);
+}
+.ledger-numbers-note {
+  font-size: var(--text-13_5);
+  color: var(--ink-soft);
+  margin-top: 22px;
+  max-width: 62ch;
+  line-height: 1.6;
+}
+
+/* ================= QUESTIONS ================= */
+.ledger-qa-block {
+  padding: 60px 0;
+}
+.ledger-qa-list {
+  margin-top: 26px;
+}
+.ledger-qa-item {
+  border-top: 1px solid var(--rule);
+}
+.ledger-qa-item:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.ledger-qa-q {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: baseline;
+  padding: 16px 0;
+  font-family: var(--font-display);
+  font-size: var(--text-17);
+  background: none;
+  border: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+.ledger-qa-ind {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+.ledger-qa-item.open .ledger-qa-ind {
+  color: var(--red);
+}
+.ledger-qa-a {
+  display: none;
+  padding: 0 0 22px;
+  max-width: 64ch;
+}
+.ledger-qa-item.open .ledger-qa-a {
+  display: block;
+}
+.ledger-qa-a p {
+  font-size: var(--text-13_5);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.ledger-qa-a p + p {
+  margin-top: 10px;
+}
+.ledger-tradeoff {
+  border-left: 2px solid var(--ink);
+  padding: 14px 16px;
+  margin-top: 14px;
+  background: var(--paper-lift);
+}
+.ledger-tt-row {
+  display: flex;
+  gap: 10px;
+  font-size: 12.5px;
+  margin-bottom: 6px;
+}
+.ledger-tt-row b {
+  flex: none;
+  width: 50px;
+  font-family: var(--font-mono);
+  font-size: var(--text-9_5);
+  text-transform: uppercase;
+}
+.ledger-tt-row--costs b {
+  color: var(--red);
+}
+
+/* ================= CONTACT ================= */
+.ledger-contact-block {
+  padding: 60px 0 80px;
+}
+.ledger-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid var(--ink);
+}
+.ledger-contact-line {
+  font-size: 16px;
+  color: var(--ink);
+  flex: 1;
+  min-width: 220px;
+}
+.ledger-contact-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.ledger-btn-solid {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 20px;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.ledger-btn-solid:hover {
+  background: var(--red);
+}
+.ledger-link-line {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--rule-strong);
+  color: var(--ink-soft);
+}
+.ledger-link-line:hover {
+  text-decoration-color: var(--ink);
+  color: var(--ink);
+}
