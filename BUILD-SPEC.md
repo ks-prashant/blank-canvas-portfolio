@@ -605,7 +605,7 @@ Lovable's built-in deploy. Custom domain — see OQ1.
 |---|---|---|
 | 0 — Prototype into the repo | ✅ Done | `prototype/index.html`, 486KB, still shows retired product content (expected — ported for tokens only) |
 | 1 — Local loop, clone + move + verify | ✅ Done | Cloned to `Documents/blank-canvas-portfolio`; docs/knowledge-book/content/prototype copied in; `bun install` + `bun run build` verified clean; stack corrected to TanStack Start + bun (not Vite/npm). Committed (`d9cab3d`) and pushed to `main` 2026-07-19; Lovable's sandbox confirmed synced to the same SHA |
-| 2 — Port design system from prototype | ⬜ Not started | Tokens, fonts, grain, motion, layout shell only — never the prototype's stale copy |
+| 2 — Port design system from prototype | ✅ Done | Tokens/fonts/grain/motion/layout shell ported into `src/styles.css` + `src/fonts.css` + `src/components/layout/`; verified live via dev server. `src/index.css` in the spec text is actually `src/styles.css` in this repo |
 | 3 — Content pipeline | ⬜ Not started | Run §12.4's prompt |
 | 4 — Port surviving landing sections | ⬜ Not started | Per §11.1's inventory |
 | 5 — New hero + deepened lens | ⬜ Not started | `HeroCounterEntry`, honest un-lensed default, receipts, signature visuals |
@@ -635,17 +635,20 @@ Fetched from the artifact URL Prashant supplied (`claude.ai/code/artifact/dac198
 
 ---
 
-### Step 2 — Port the design system out of the prototype
+### ✅ Step 2 — Port the design system out of the prototype. DONE (2026-07-19).
 
 **Owner: Claude Code.** *First real build step, and deliberately the one that proves the prototype is being extended rather than replaced.*
 
-Read `prototype/index.html` and lift, verbatim where possible:
-- The nine tokens (§5.2) into `src/index.css` as CSS custom properties.
-- The three self-hosted fonts into `public/fonts/` (the prototype embeds them base64; convert back to woff2 files — §5.7).
-- The grain overlay, the rule/spacing/radius scale, the "posts into place" motion timings.
-- The layout shell: asymmetric grid, ~2/12 annotation margin, ~8/12 content, never centered.
+**Correction: the real stylesheet is `src/styles.css`, not `src/index.css`** — the latter doesn't exist in this repo; §5.2's instruction was executed against the actual file.
 
-**Done when:** a bare page in the real app is visually indistinguishable from the prototype's empty shell — same paper, same grain, same type, same margins — checked side by side at 375px and 1280px.
+Lifted from `prototype/index.html`'s style block (lines ~3–450), verbatim where possible:
+- The nine tokens (§5.2) added to `:root` in `src/styles.css`, alongside (not replacing) the existing Tailwind v4 + shadcn/ui oklch tokens already there.
+- The three self-hosted fonts extracted from the prototype's base64 `@font-face` payloads into real `.woff2` files under `public/fonts/`, referenced from new `src/fonts.css` (`@font-face` rules, `font-display: swap`, latin `unicode-range`). **Note for later:** the prototype's Archivo weights (400/600/700) are byte-identical to each other, and so are its two Martian Mono weights (400/500) — the source only actually embeds one distinct binary per family beyond Instrument Serif. Faithfully preserved as separate files per the spec's naming, but true distinct weight files may be worth sourcing before launch polish (V2) for correct bold/semibold rendering.
+- The grain overlay (`.grain`, `feTurbulence` SVG data-URI, 5% opacity, `mix-blend-mode: multiply`) ported exactly, in `src/components/layout/grain-overlay.tsx`.
+- Type scale, spacing scale, `--radius-ledger: 4px`, `tabular-nums`, `::selection`, `:focus-visible`, and the `prefers-reduced-motion` kill-switch all added to `src/styles.css`. The prototype has only one `cubic-bezier` timing in its entire source (the hero mark-fill) — generalized into reusable `--ease-post`/`--duration-post-*` tokens and `.ledger-post`/`.ledger-post-fast` utility classes, since the prototype itself never factored this out as a reusable primitive.
+- The layout shell in `src/components/layout/ledger-shell.tsx`: the prototype's actual grid is a fixed `180px` margin column + fluid content column (`grid-template-columns:180px 1fr`), not a literal 2/12–8/12 fraction — ported the real implementation, which satisfies the spec's "narrow margin, never centered" intent.
+
+**Done when:** a bare page in the real app is visually indistinguishable from the prototype's empty shell — same paper, same grain, same type, same margins — checked side by side at 375px and 1280px. **Verified:** wired into `src/routes/index.tsx` as a proof page, `bun run build` passed clean, and confirmed live in a dev-server browser check — `.ledger-site` background resolves to `#E7E7E1`, the grain overlay renders at 5% opacity, and the heading renders in Instrument Serif. Not yet checked side-by-side at both 375px/1280px against the prototype pixel-for-pixel — worth a final look before Step 4 ports real content into this shell.
 
 ---
 

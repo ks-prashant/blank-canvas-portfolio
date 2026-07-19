@@ -1,8 +1,89 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./fonts.css";
 
 @custom-variant dark (&:is(.dark *));
+
+/*
+ * The Ledger — design tokens, ported verbatim from prototype/index.html's
+ * :root block (BUILD-SPEC.md §5.2). These are separate from the
+ * shadcn/ui oklch tokens below (--background, --primary, etc.) and are
+ * additive, not a replacement — style Ledger UI through these only,
+ * never hardcode a hex in a component.
+ */
+:root {
+  --paper: #E7E7E1;
+  --paper-lift: #EFEFEA;
+  --ink: #15181E;
+  --ink-soft: #5C6169;
+  --ink-faint: #8B9098;
+  --rule: #CFCFC8;
+  --rule-strong: #B4B4AC;
+  --red: #B23A26;
+  --red-wash: #E8D5CF;
+
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Martian Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+
+  /* Type scale — BUILD-SPEC §5.3 */
+  --text-9_5: 9.5px;
+  --text-10_5: 10.5px;
+  --text-11: 11px;
+  --text-12: 12px;
+  --text-13: 13px;
+  --text-13_5: 13.5px;
+  --text-15: 15px;
+  --text-17: 17px;
+  --text-19: 19px;
+  --text-21: 21px;
+  --text-23: 23px;
+  --text-25: 25px;
+  --text-28: 28px;
+  --text-40: 40px;
+  --text-hero: clamp(62px, 8vw, 88px);
+
+  /* Spacing scale — BUILD-SPEC §5.3 */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-96: 96px;
+
+  /* Radius — rules provide elevation, not rounded corners. 0 or 4px only. */
+  --radius-ledger: 4px;
+
+  /* Motion — "posts into place": sharp ease-out with slight overshoot */
+  --ease-post: cubic-bezier(.2, .9, .3, 1);
+  --duration-post-fast: 120ms;
+  --duration-post-slow: 500ms;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: var(--red-wash);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
 
 /*
  * Design system definition.
@@ -141,4 +222,95 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
+}
+
+/*
+ * The Ledger — layout shell.
+ *
+ * Ported from prototype/index.html's LAYOUT block (BUILD-SPEC §5.4).
+ * Scope is deliberately narrow: the asymmetric grid, the grain overlay,
+ * and the "posts into place" motion primitive. No nav/hero/lens-picker
+ * styling here — those are later build steps.
+ */
+
+.ledger-site {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+}
+
+.ledger-grid {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 36px;
+}
+@media (max-width: 860px) {
+  .ledger-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0 20px;
+  }
+}
+
+.ledger-margin-col {
+  padding-top: 4px;
+}
+@media (max-width: 860px) {
+  .ledger-margin-col {
+    display: none;
+  }
+}
+
+.ledger-margin-note {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  line-height: 1.55;
+  color: var(--ink-faint);
+  padding-top: 3px;
+}
+.ledger-margin-note.cost {
+  color: var(--red);
+}
+
+.ledger-content-col {
+  min-width: 0;
+}
+
+.ledger-wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+@media (max-width: 860px) {
+  .ledger-wrap {
+    padding: 0 20px;
+  }
+}
+
+/* Grain overlay — 5% opacity, multiply-blended, felt not seen (BUILD-SPEC §5.5) */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22 stitchTiles=%22stitch%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/></svg>');
+}
+
+/* "Posts into place" — the shared motion primitive for anything that
+   appears/settles on screen: sharp ease-out with a slight overshoot. */
+.ledger-post {
+  transition: transform var(--duration-post-slow) var(--ease-post),
+    opacity var(--duration-post-slow) var(--ease-post);
+}
+.ledger-post-fast {
+  transition: transform var(--duration-post-fast) var(--ease-post),
+    opacity var(--duration-post-fast) var(--ease-post);
 }
