@@ -606,7 +606,7 @@ Lovable's built-in deploy. Custom domain — see OQ1.
 | 0 — Prototype into the repo | ✅ Done | `prototype/index.html`, 486KB, still shows retired product content (expected — ported for tokens only) |
 | 1 — Local loop, clone + move + verify | ✅ Done | Cloned to `Documents/blank-canvas-portfolio`; docs/knowledge-book/content/prototype copied in; `bun install` + `bun run build` verified clean; stack corrected to TanStack Start + bun (not Vite/npm). Committed (`d9cab3d`) and pushed to `main` 2026-07-19; Lovable's sandbox confirmed synced to the same SHA |
 | 2 — Port design system from prototype | ✅ Done | Tokens/fonts/grain/motion/layout shell ported into `src/styles.css` + `src/fonts.css` + `src/components/layout/`; verified live via dev server. `src/index.css` in the spec text is actually `src/styles.css` in this repo |
-| 3 — Content pipeline | ⬜ Not started | Run §12.4's prompt |
+| 3 — Content pipeline | ✅ Done | `src/content/types.ts` written verbatim from §7.2; `content/product-essays.md` authored (19 automjet blocks, 24 grounded-governance blocks); `scripts/build-content.ts` compiles `knowledge-book/` + all three `content/*.md` files into `src/content/{projects,principles,metrics,lenses}.ts`, zod-validated, confidentiality-gated. `bun run content:build` and `bun run build` both verified clean. Not yet committed. |
 | 4 — Port surviving landing sections | ⬜ Not started | Per §11.1's inventory |
 | 5 — New hero + deepened lens | ⬜ Not started | `HeroCounterEntry`, honest un-lensed default, receipts, signature visuals |
 | 6 — Two product pages ★ | ⬜ Not started | Sequence: GG founder artifact first, then Automjet engineer artifact |
@@ -652,13 +652,19 @@ Lifted from `prototype/index.html`'s style block (lines ~3–450), verbatim wher
 
 ---
 
-### Step 3 — The content pipeline
+### ✅ Step 3 — The content pipeline. DONE (2026-07-19).
 
-**Owner: Claude Code.** Run the §12.4 prompt.
+**Owner: Claude Code.**
 
-`src/content/types.ts` (§7.2) → `scripts/build-content.ts` compiling `knowledge-book/` + `content/lens-copy.md` + `content/case-pages.md` into `projects.ts` / `principles.ts` / `metrics.ts` / `lenses.ts`. Zod-validated, build fails loudly on a schema violation. Confidentiality guard (§7.3) throws in dev.
+`src/content/types.ts` (§7.2, copied verbatim). `content/product-essays.md` (new — 19 `ContentBlock`s for `automjet`, 24 for `grounded-governance`, every one carrying a real knowledge-book `source` anchor and per-lens `treatments`). `scripts/build-content.ts` is a deterministic markdown/regex parser + compiler (no LLM call anywhere in it) that reads `knowledge-book/` + all three `content/*.md` files and writes `src/content/projects.ts` (13 projects: 2 full essays, 6 case studies, 5 one-liners), `principles.ts` (8, curated from `05-methodology.md`, ≥2 cross-company evidence entries each, zod-enforced), `metrics.ts` (33 metrics flattened across all projects with `projectSlug` + `SourceLabel`), and `lenses.ts` (the hero copy, all three lenses). Every output is zod-validated against a mirror of `types.ts`; the confidentiality gate is enforced both as a schema `superRefine` (a confidential project may not carry an `essay` or `recordings`, and only `personal`-org projects may be non-confidential) and as a runtime guard (`assertProjectCanRenderRawArtifact`, exported from the build script for component-layer reuse) that throws given a confidential project. A raw-artifact-leak heuristic scans every confidential project's lensed prose for JSON-shaped or system-prompt-shaped text and throws if found.
 
-**Done when:** content modules type-check; every `ContentBlock` carries a knowledge-book `source` anchor; a deliberate confidentiality violation throws; a deliberately malformed block fails the build.
+**Verified:** `bun run content:build` compiles clean; `bunx tsc --noEmit` passes on the whole repo including the four generated modules; `bun run build` still builds clean with the new modules present (unconsumed — Step 4's job). Deliberately sabotaged twice to confirm the fail-loudly requirement: a `ContentBlock` with its `source` anchor blanked out failed the zod validation with a clear error, then was restored. Not yet committed — left for review per the standing pause-point convention.
+
+**Flagged for Prashant's review, same loop as the other two content files:**
+- Unconfirmed facts omitted per the binding tables: no Automjet build-timeline/months-live claim, no `automjet-connect-pks.lovable.app` reference (OQ7), no Grounded Governance usage/traffic figure anywhere.
+- `ContentBlock.id` scheme: `{slug}-{NN}` (e.g. `automjet-07`, `gg-16`), assigned in authored order; the actual per-lens reading order lives in `ProductEssay.artifact[lens].order`, not in the id numbering.
+- Where `case-pages.md`'s own depth vocabulary ("technical framing," "the pattern," "brief") didn't map onto `CaseSection.depth`'s 3-value enum (`short`/`full`/`omit`), the parser maps them to the nearest of the three and a lens block with no captured body (or an explicit "not specified in the source material" gap) is forced to `omit` regardless of the §8.5 table default — documented inline in `build-content.ts`'s `CASE_DEPTH_TABLE` comment.
+- `principles.ts` and per-project `metrics` in `projects.ts` are curated (hand-transcribed from the knowledge-book sections cited in each entry) rather than regex-parsed from prose, since `05-methodology.md` and the Tier-3 project files are flowing argument, not structured lists. Every fact still traces to a cited file; nothing invented.
 
 ---
 
