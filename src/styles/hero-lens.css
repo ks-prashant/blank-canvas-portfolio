@@ -1,0 +1,478 @@
+/*
+ * BUILD-SPEC.md §11 Step 5 — CSS for the new hero (`HeroCounterEntry`,
+ * C9), the two live-product entries (`LiveProductEntry`, C18), and the
+ * deepened lens system (`LensPicker` C10, `LensPill` C11, `LensSignature`
+ * C8, `LensReceipt` C22, `UnlensedMark` C23, `TradeoffCard` C17).
+ *
+ * Same convention as `landing-sections.css`: kept out of `src/styles.css`
+ * and loaded via a side-effect import from `src/routes/index.tsx`, using
+ * the `ledger-` class prefix already established. Tokens only — never a
+ * hardcoded hex. Rules, not cards: every "picker option"/"tradeoff" block
+ * below is bounded by a 1px `var(--rule)` border, not a radius+shadow box.
+ */
+
+/* ================= LENS PILL (C11) ================= */
+.ledger-lens-pill {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: inline-block;
+  margin: 0 0 var(--space-16);
+  font-family: var(--font-mono);
+}
+.ledger-lens-pill-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  list-style: none;
+  padding: 6px 12px;
+  font-size: var(--text-11);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: var(--paper-lift);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-ledger);
+}
+.ledger-lens-pill-summary::-webkit-details-marker {
+  display: none;
+}
+.ledger-lens-pill-summary strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+.ledger-lens-pill-menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-ledger);
+  background: var(--paper-lift);
+  overflow: hidden;
+  min-width: 200px;
+}
+.ledger-lens-pill-option {
+  text-align: left;
+  padding: 8px 12px;
+  font-family: var(--font-body);
+  font-size: var(--text-13);
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+}
+.ledger-lens-pill-option:last-child {
+  border-bottom: none;
+}
+.ledger-lens-pill-option:hover,
+.ledger-lens-pill-option.is-active {
+  background: var(--paper);
+}
+.ledger-lens-pill-option.is-active {
+  font-weight: 600;
+}
+
+/* ================= HERO (C9) ================= */
+.ledger-hero-block {
+  padding: 48px 0 72px;
+}
+.ledger-hero-mark {
+  padding-bottom: var(--space-32);
+}
+.ledger-hero-mark-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 200px;
+  margin-bottom: var(--space-32);
+}
+.ledger-hero-mark-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0;
+  max-width: 28px;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: ledger-hero-mark-post var(--duration-post-slow) var(--ease-post) forwards;
+}
+.ledger-hero-mark-ink {
+  width: 100%;
+  background: var(--ink);
+  align-self: flex-end;
+}
+.ledger-hero-mark-baseline {
+  width: 100%;
+  height: 1px;
+  background: var(--rule-strong);
+  flex: none;
+}
+.ledger-hero-mark-red {
+  width: 100%;
+  background: var(--red);
+  align-self: flex-start;
+}
+@keyframes ledger-hero-mark-post {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ledger-hero-thesis {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-hero);
+  line-height: 1.05;
+  max-width: 18ch;
+  color: var(--ink);
+}
+.ledger-hero-subcopy {
+  margin-top: var(--space-24);
+  max-width: 62ch;
+  font-size: var(--text-17);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.ledger-hero-subcopy-clarify {
+  margin-top: var(--space-12);
+  font-style: italic;
+  color: var(--ink-faint);
+}
+
+/* ================= LIVE PRODUCT ENTRIES (C18) ================= */
+.ledger-live-entries {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--rule);
+  margin: var(--space-48) 0;
+}
+.ledger-live-entry {
+  display: flex;
+  gap: var(--space-16);
+  padding: var(--space-24) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.ledger-live-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+  animation: ledger-live-pulse 2.2s ease-in-out infinite;
+}
+@keyframes ledger-live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.ledger-live-entry-body {
+  flex: 1;
+  min-width: 0;
+}
+.ledger-live-entry-name {
+  font-family: var(--font-display);
+  font-size: var(--text-23);
+  color: var(--ink);
+}
+.ledger-live-entry-line {
+  margin-top: 6px;
+  font-size: var(--text-15);
+  color: var(--ink-soft);
+  max-width: 68ch;
+}
+.ledger-live-entry-links {
+  display: flex;
+  gap: var(--space-24);
+  margin-top: var(--space-12);
+}
+.ledger-live-entry-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ================= LENS RECEIPT (C22) ================= */
+.ledger-lens-receipt {
+  margin-top: var(--space-12);
+}
+.ledger-lens-receipt-summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+.ledger-lens-receipt-summary::-webkit-details-marker {
+  display: none;
+}
+.ledger-lens-receipt-body {
+  margin-top: 6px;
+  font-size: var(--text-13);
+  color: var(--ink-soft);
+  max-width: 56ch;
+  border-left: 2px solid var(--rule-strong);
+  padding-left: 10px;
+}
+
+/* ================= UNLENSED MARK (C23) ================= */
+.ledger-unlensed-mark {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-ledger);
+  padding: 3px 8px;
+}
+
+/* ================= LENS PICKER (C10) ================= */
+.ledger-lens-picker {
+  border-top: 1px solid var(--rule);
+  padding: var(--space-48) 0;
+}
+.ledger-lens-picker-prompt {
+  font-family: var(--font-display);
+  font-size: var(--text-28);
+  max-width: 20ch;
+  color: var(--ink);
+}
+.ledger-lens-picker-body {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-32);
+  margin-top: var(--space-32);
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .ledger-lens-picker-body {
+    grid-template-columns: 1fr;
+  }
+}
+.ledger-lens-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+@media (max-width: 640px) {
+  .ledger-lens-options {
+    grid-template-columns: 1fr;
+  }
+}
+.ledger-lens-option {
+  text-align: left;
+  padding: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+.ledger-lens-option:hover {
+  background: var(--paper-lift);
+}
+.ledger-lens-option.is-active {
+  background: var(--paper-lift);
+  box-shadow: inset 0 2px 0 var(--ink);
+}
+.ledger-lens-option-label {
+  font-family: var(--font-display);
+  font-size: var(--text-21);
+  color: var(--ink);
+}
+.ledger-lens-option-decision {
+  font-size: var(--text-13);
+  color: var(--ink-soft);
+}
+.ledger-lens-option-currency {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+.ledger-lens-option-argument {
+  font-size: var(--text-13_5);
+  font-style: italic;
+  color: var(--ink);
+  margin-top: auto;
+}
+.ledger-lens-picker-signature {
+  margin-top: var(--space-32);
+  border-top: 1px solid var(--rule);
+  padding-top: var(--space-24);
+}
+.ledger-lens-picker-unset {
+  margin-top: var(--space-24);
+  font-size: var(--text-13);
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+/* ================= TRADEOFF CARD (C17) ================= */
+.ledger-tradeoff-card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-ledger);
+  padding: var(--space-16);
+}
+.ledger-tradeoff-title {
+  font-family: var(--font-display);
+  font-size: var(--text-17);
+  color: var(--ink);
+}
+.ledger-tradeoff-list {
+  margin-top: var(--space-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+.ledger-tradeoff-row dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+.ledger-tradeoff-row dd {
+  margin-top: 4px;
+  font-size: var(--text-13_5);
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.ledger-tradeoff-row--cost dd {
+  color: var(--red);
+}
+
+/* ================= LENS SIGNATURE (C8) ================= */
+.ledger-signature-caption {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  margin-bottom: var(--space-16);
+}
+
+/* Recruiter — Evidence Ladder */
+.ledger-ladder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+.ledger-ladder-rung {
+  display: grid;
+  grid-template-columns: 120px 1fr 32px;
+  align-items: center;
+  gap: 12px;
+}
+.ledger-ladder-label {
+  font-size: var(--text-12);
+  color: var(--ink-soft);
+}
+.ledger-ladder-bar-track {
+  height: 10px;
+  background: var(--rule);
+  border-radius: var(--radius-ledger);
+  overflow: hidden;
+}
+.ledger-ladder-bar {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+}
+.ledger-ladder-bar.is-cost {
+  background: var(--red);
+}
+.ledger-ladder-count {
+  text-align: right;
+  font-size: var(--text-13);
+  color: var(--ink);
+}
+
+/* Founder/PM — Decision Ledger */
+.ledger-decision-rows {
+  display: flex;
+  flex-direction: column;
+}
+.ledger-decision-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--text-13_5);
+}
+.ledger-decision-row dt {
+  color: var(--ink);
+  font-weight: 600;
+}
+.ledger-decision-row dd {
+  color: var(--ink-soft);
+  text-align: right;
+}
+.ledger-decision-sep {
+  color: var(--ink-faint);
+}
+
+/* Engineer — Structure Board */
+.ledger-structure-rows {
+  display: flex;
+  flex-direction: column;
+}
+.ledger-structure-row {
+  display: grid;
+  grid-template-columns: 28px 160px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.ledger-structure-row.is-site {
+  color: var(--ink);
+}
+.ledger-structure-row.is-site .ledger-structure-name {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ledger-structure-num {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  color: var(--ink-faint);
+}
+.ledger-structure-name {
+  font-family: var(--font-display);
+  font-size: var(--text-15);
+  color: var(--ink);
+}
+.ledger-structure-mechanism {
+  font-size: var(--text-13);
+  color: var(--ink-soft);
+}
+@media (max-width: 640px) {
+  .ledger-structure-row {
+    grid-template-columns: 28px 1fr;
+  }
+  .ledger-structure-mechanism {
+    grid-column: 2;
+  }
+}

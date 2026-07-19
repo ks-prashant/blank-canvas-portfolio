@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { education, journey, throughline } from "../../content/site-copy";
 import { SectionGrid, SectionHeading } from "./section-heading";
+import { Prose } from "../../components/prose";
 
 /**
  * `#journey` — the career timeline (C13 `JourneyLine`), BUILD-SPEC §11.1:
@@ -80,7 +81,7 @@ export function JourneySection() {
                     id={`jd-${pi}-${ri}`}
                   >
                     <div className="ledger-jd-ti">{role.title}</div>
-                    <p>{role.body}</p>
+                    <p><Prose text={role.body} /></p>
                     <div className="ledger-jd-nums">
                       {role.numbers.map((n) => (
                         <span key={n}>{n}</span>
@@ -95,7 +96,7 @@ export function JourneySection() {
 
         <div className="ledger-throughline">
           <div className="ledger-tl-label">{throughline.label}</div>
-          <p>{throughline.body}</p>
+          <p><Prose text={throughline.body} /></p>
         </div>
 
         <div className="ledger-edu-row">

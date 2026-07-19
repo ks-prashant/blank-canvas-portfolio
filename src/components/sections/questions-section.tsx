@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { faq } from "../../content/site-copy";
 import { SectionGrid, SectionHeading } from "./section-heading";
+import { Prose } from "../../components/prose";
 
 /**
  * `#questions` — the FAQ (BUILD-SPEC §11.1: "Keep" — unchanged). Structure
@@ -39,17 +40,17 @@ export function QuestionsSection() {
                 </button>
                 <div className="ledger-qa-a">
                   {item.answer.map((paragraph) => (
-                    <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+                    <p key={paragraph.slice(0, 24)}><Prose text={paragraph} /></p>
                   ))}
                   {item.tradeoff ? (
                     <div className="ledger-tradeoff">
                       <div className="ledger-tt-row">
                         <b>Buys</b>
-                        <span>{item.tradeoff.buys}</span>
+                        <span><Prose text={item.tradeoff.buys} /></span>
                       </div>
                       <div className="ledger-tt-row ledger-tt-row--costs">
                         <b>Costs</b>
-                        <span>{item.tradeoff.costs}</span>
+                        <span><Prose text={item.tradeoff.costs} /></span>
                       </div>
                     </div>
                   ) : null}

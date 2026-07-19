@@ -1,5 +1,6 @@
 import { contact } from "../../content/site-copy";
 import { SectionGrid } from "./section-heading";
+import { Prose } from "../../components/prose";
 
 /**
  * `#contact` — next step (BUILD-SPEC §11.1: "Keep" — unchanged). Structure
@@ -21,7 +22,7 @@ export function ContactSection() {
           Next step
         </p>
         <div className="ledger-contact-row">
-          <div className="ledger-contact-line">{contact.line}</div>
+          <div className="ledger-contact-line"><Prose text={contact.line} /></div>
           <div className="ledger-contact-actions">
             <a className="ledger-btn-solid" href={`mailto:${contact.email}`}>
               Email

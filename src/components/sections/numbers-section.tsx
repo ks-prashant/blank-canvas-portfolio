@@ -1,6 +1,8 @@
 import { metrics } from "../../content/metrics";
 import { projects } from "../../content/projects";
 import type { SourceLabel } from "../../content/types";
+import { UnlensedMark } from "../lens/unlensed-mark";
+import { Prose } from "../../components/prose";
 import { SectionGrid, SectionHeading } from "./section-heading";
 
 /**
@@ -67,6 +69,7 @@ export function NumbersSection() {
           heading="Every number, and how I know it"
           dek="Grouped by how much you should trust it. Some were A/B tested. One is a hand-checked eval. Two fell short of the bar that was set. One isn't a number at all."
         />
+        <UnlensedMark />
 
         <div id="scoretable">
           {GROUPS.map((group) => {
@@ -84,8 +87,7 @@ export function NumbersSection() {
                     <div>
                       <div className="ledger-sl">{metric.label}</div>
                       <div className="ledger-sd">
-                        {metric.method}
-                        {metric.caveat ? ` — ${metric.caveat}` : ""}
+                        <Prose text={metric.method + (metric.caveat ? ` — ${metric.caveat}` : "")} />
                       </div>
                     </div>
                     <div className="ledger-sv tabular">{metric.value}</div>
@@ -100,6 +102,7 @@ export function NumbersSection() {
               <div className="ledger-sg-head">
                 <span className="ledger-sg-t">Not a number — a decision</span>
                 <span className="ledger-sg-d">The one I'd point at first</span>
+                <UnlensedMark />
               </div>
               <div className="ledger-score-row">
                 <div>

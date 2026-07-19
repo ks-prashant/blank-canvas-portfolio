@@ -4,6 +4,7 @@ import { principles } from "../../content/principles";
 import { projects } from "../../content/projects";
 import type { Principle } from "../../content/types";
 import { SectionGrid, SectionHeading } from "./section-heading";
+import { Prose } from "../../components/prose";
 
 /**
  * `#principles` — the 8 principles in 4 themed groups (BUILD-SPEC §11.1:
@@ -82,14 +83,14 @@ export function PrinciplesSection() {
                         <span className="ledger-pind">{isOpen ? "−" : "+"}</span>
                       </button>
                       <div className="ledger-pbody">
-                        <p>{principle.body}</p>
+                        <p><Prose text={principle.body} /></p>
                         <dl className="ledger-pevidence">
                           {principle.evidence.map((e) => (
                             <div className="ledger-pevidence-row" key={e.projectSlug + e.note.slice(0, 12)}>
                               <dt>
                                 <span className="ledger-pchip">{projectName(e.projectSlug)}</span>
                               </dt>
-                              <dd>{e.note}</dd>
+                              <dd><Prose text={e.note} /></dd>
                             </div>
                           ))}
                         </dl>
