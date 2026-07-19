@@ -604,7 +604,7 @@ Lovable's built-in deploy. Custom domain — see OQ1.
 | Step | Status | Note |
 |---|---|---|
 | 0 — Prototype into the repo | ✅ Done | `prototype/index.html`, 486KB, still shows retired product content (expected — ported for tokens only) |
-| 1 — Local loop, clone + move + verify | 🟡 Done except commit | Cloned to `Documents/blank-canvas-portfolio`; docs/knowledge-book/content/prototype copied in; `bun install` + `bun run build` verified clean; stack corrected to TanStack Start + bun (not Vite/npm). **Not committed/pushed** — paused for explicit go-ahead |
+| 1 — Local loop, clone + move + verify | ✅ Done | Cloned to `Documents/blank-canvas-portfolio`; docs/knowledge-book/content/prototype copied in; `bun install` + `bun run build` verified clean; stack corrected to TanStack Start + bun (not Vite/npm). Committed (`d9cab3d`) and pushed to `main` 2026-07-19; Lovable's sandbox confirmed synced to the same SHA |
 | 2 — Port design system from prototype | ⬜ Not started | Tokens, fonts, grain, motion, layout shell only — never the prototype's stale copy |
 | 3 — Content pipeline | ⬜ Not started | Run §12.4's prompt |
 | 4 — Port surviving landing sections | ⬜ Not started | Per §11.1's inventory |
@@ -622,7 +622,7 @@ Fetched from the artifact URL Prashant supplied (`claude.ai/code/artifact/dac198
 
 ---
 
-### ✅ Step 1 — Local loop, one-way sync. DONE (2026-07-19), except the commit.
+### ✅ Step 1 — Local loop, one-way sync. DONE (2026-07-19).
 
 **⚠️ Stack correction, confirmed by inspection of the actual clone — read before touching `src/`:** this is **not** a plain Vite+React scaffold. It's **TanStack Start** (React 19, file-based routing under `src/routes/*.tsx`), Tailwind v4, shadcn/ui components already in `src/components/ui`, zod already a dependency, package manager is **bun** (`bun.lock`/`bunfig.toml` present — `npm` is not installed in this environment), and the build targets **Cloudflare Workers** via Nitro (`cloudflare-module` preset, confirmed by a clean `bun run build`). This is the exact same stack shape the Grounded Governance project landed on for the same reason (Lovable's current TanStack template) — see that project's build plan §A.0 correction note for the general pattern. **Wherever this spec or its §12 prompts say `npm`, read `bun`. Wherever they imply a hand-rolled router, read TanStack Router's file-based convention** — `/work/automjet` becomes `src/routes/work/automjet.tsx`, `/case/$slug` uses TanStack's `$param` file-naming, etc. The IA in §4 is unaffected; only the file locations and the exact routing API differ.
 
@@ -631,7 +631,7 @@ Fetched from the artifact URL Prashant supplied (`claude.ai/code/artifact/dac198
 3. ✅ `bun install` (419 packages, clean) and `bun run build` (clean, ~3.5s, correctly targets Cloudflare) both verified. Build output (`.output/`, `.wrangler/`) cleaned up afterward — it's gitignored and shouldn't be committed.
 4. **Sync rule (from the Grounded Governance build's hard-won lesson):** Lovable and Claude Code write to the same `main`. Serialize access — at any moment either you're touching Lovable or Claude Code is committing, never both. After any Lovable-side change, `git pull` before resuming. Since Lovable isn't being prompted to build here, this stays nearly one-way: **Claude Code → GitHub → Lovable pulls → deploy.**
 
-**Remaining to close this step:** commit the moved files and push — pending explicit go-ahead, since `git push` is a shared/visible action. Once pushed, confirm it appears in Lovable's sandbox before treating the step as fully closed.
+**Closed:** committed (`d9cab3d`) and pushed to `main` 2026-07-19; Lovable's sandbox `latest_commit_sha` confirmed matching via `get_project`.
 
 ---
 
