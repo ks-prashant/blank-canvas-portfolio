@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WorkGroundedGovernanceRouteImport } from './routes/work/grounded-governance'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WorkGroundedGovernanceRoute = WorkGroundedGovernanceRouteImport.update({
+  id: '/work/grounded-governance',
+  path: '/work/grounded-governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/work/grounded-governance': typeof WorkGroundedGovernanceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/work/grounded-governance': typeof WorkGroundedGovernanceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/work/grounded-governance': typeof WorkGroundedGovernanceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/work/grounded-governance'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/work/grounded-governance'
+  id: '__root__' | '/' | '/work/grounded-governance'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  WorkGroundedGovernanceRoute: typeof WorkGroundedGovernanceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/work/grounded-governance': {
+      id: '/work/grounded-governance'
+      path: '/work/grounded-governance'
+      fullPath: '/work/grounded-governance'
+      preLoaderRoute: typeof WorkGroundedGovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  WorkGroundedGovernanceRoute: WorkGroundedGovernanceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

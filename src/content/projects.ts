@@ -578,6 +578,7 @@ export const projects: Project[] = [
             "gg-18",
             "gg-19",
             "gg-20",
+            "gg-12",
             "gg-22"
           ]
         }
@@ -805,7 +806,8 @@ export const projects: Project[] = [
               "receipt": "full numbers with the required interim-config caveat, never rounded up."
             },
             "engineer": {
-              "depth": "omit"
+              "depth": "brief",
+              "receipt": "§9.3 makes the honest eval story the centerpiece for every lens, not just recruiter/founder — the engineer view states the same failing numbers before moving into the eval-harness mechanism (gg-22) that produced them."
             }
           }
         },

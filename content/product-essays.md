@@ -367,7 +367,7 @@ Order: gg-01, gg-15, gg-12, gg-24, gg-14
 Order: gg-01, gg-24, gg-03, gg-04, gg-05, gg-21, gg-14, gg-12
 
 **Engineer — genre: review**
-Order: gg-06, gg-07, gg-08, gg-09, gg-10, gg-11, gg-16, gg-17, gg-18, gg-19, gg-20, gg-22
+Order: gg-06, gg-07, gg-08, gg-09, gg-10, gg-11, gg-16, gg-17, gg-18, gg-19, gg-20, gg-12, gg-22
 
 ---
 
@@ -555,8 +555,9 @@ Order: gg-06, gg-07, gg-08, gg-09, gg-10, gg-11, gg-16, gg-17, gg-18, gg-19, gg-
 > The first full evaluation run failed, 93.3% groundedness against a 95% bar, 83.3% correct-refusal against 90%. Six root causes found and fixed. The comprehensive re-run is deliberately held for launch, to measure the finished product once rather than a moving one twice. **Every first-run number above certifies the interim configuration** (a temporary Sonnet 5 generation model, since reverted to Opus 4.8 for the real gate) and should never be read as the final score.
 *Receipt: full numbers with the required interim-config caveat, never rounded up.*
 
-**Engineer — depth: omit**
-*(the engineer artifact treats the eval as incident-adjacent detail; gg-16 through gg-20's incident ledger and gg-22's golden-set design carry the engineer's version of this story)*
+**Engineer — depth: brief**
+> Retrieval proven, 7/7 on the GDPR gate slice. The first full generation eval run failed on two of three targets: groundedness 93.3% against a 95% bar, correct-refusal 83.3% against 90%; citation accuracy passed at 93.8%. Six root causes found and fixed, each re-verified individually. First-run numbers certify only the interim configuration (a temporary Sonnet 5 generation model, since reverted to Opus 4.8) — the comprehensive re-run is deliberately deferred to launch.
+*Receipt: §9.3 makes the honest eval story the centerpiece for every lens, not just recruiter/founder — the engineer view states the same failing numbers before moving into the eval-harness mechanism (gg-22) that produced them.*
 
 ---
 
