@@ -101,6 +101,21 @@
   transform: translateY(6px);
   animation: ledger-hero-mark-post var(--duration-post-slow) var(--ease-post) forwards;
 }
+@media (prefers-reduced-motion: reduce) {
+  /* The global kill-switch (src/styles.css) sets animation: none !important
+     for anyone with reduced-motion on, which cancels the fill-in animation
+     above - but this element's own base style is opacity:0 (its pre-
+     animation state), so without this override it stays permanently
+     invisible instead of showing the final state, exactly backwards from
+     what §13 requires ("prefers-reduced-motion ... renders final state
+     instantly"). This was a real bug: the hero mark rendered fine in
+     environments without reduced-motion set, invisible in any browser/OS
+     that has it on. */
+  .ledger-hero-mark-pair {
+    opacity: 1;
+    transform: none;
+  }
+}
 .ledger-hero-mark-ink {
   width: 100%;
   background: var(--ink);
