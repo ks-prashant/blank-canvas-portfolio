@@ -237,6 +237,19 @@
  * styling here — those are later build steps.
  */
 
+/* Offset in-page anchor jumps (#work, #numbers, #contact) so the target
+   clears the sticky SiteHeader instead of landing under it. Matches the
+   header's ~52px height with a little breathing room; reset on phones
+   (<=600px), where the header reverts to static. */
+html {
+  scroll-padding-top: 64px;
+}
+@media (max-width: 600px) {
+  html {
+    scroll-padding-top: 0;
+  }
+}
+
 .ledger-site {
   background: var(--paper);
   color: var(--ink);

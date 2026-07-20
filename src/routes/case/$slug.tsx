@@ -7,7 +7,6 @@ import { CaseHonestyFooter } from "../../components/case/case-honesty-footer";
 import { CaseSections } from "../../components/case/case-sections";
 import { CaseSignatureVisual } from "../../components/case/case-signature-visual";
 import { CaseSummary } from "../../components/case/case-summary";
-import { LensPill } from "../../components/lens/lens-pill";
 import { LENS_LABELS, LensProvider, useLens, validateLensSearch } from "../../content/lens-context";
 import { projects } from "../../content/projects";
 import type { Project } from "../../content/types";
@@ -81,7 +80,6 @@ function CasePageRoute() {
   return (
     <LensProvider initialLens={lens ?? null}>
       <LedgerShell>
-        <LensPill />
         <CasePage project={project} />
       </LedgerShell>
     </LensProvider>

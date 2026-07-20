@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { LedgerShell } from "../components/layout/ledger-shell";
-import { LensPill } from "../components/lens/lens-pill";
 import { ContactSection } from "../components/sections/contact-section";
 import { HeroSection } from "../components/sections/hero-section";
 import { JourneySection } from "../components/sections/journey-section";
@@ -28,9 +27,10 @@ export const Route = createFileRoute("/")({
 
 // BUILD-SPEC §11 Step 5: the new hero + deepened lens, assembled above the
 // six Step 4 sections. `LensProvider` wraps the whole page (not just the
-// hero) so `LensPill` reads as genuinely global/sticky and any section —
-// Step 4's six included — can adopt `useLens()` incrementally; only
-// `NumbersSection` does so today, to render its `UnlensedMark`s.
+// hero) so the `LensPill` — now rendered inside the sticky `SiteHeader`
+// (LedgerShell) rather than as a floating element here — reads as genuinely
+// global, and any section (Step 4's six included) can adopt `useLens()`
+// incrementally; only `NumbersSection` does so today, for its `UnlensedMark`s.
 //
 // LedgerShell is used bare here (no page-level marginContent) because
 // each section below carries its own per-section margin annotation via
@@ -42,7 +42,6 @@ function Index() {
   return (
     <LensProvider initialLens={lens ?? null}>
       <LedgerShell>
-        <LensPill />
         <HeroSection />
         <JourneySection />
         <WorkIndexSection />

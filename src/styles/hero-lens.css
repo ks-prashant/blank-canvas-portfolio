@@ -11,71 +11,10 @@
  * below is bounded by a 1px `var(--rule)` border, not a radius+shadow box.
  */
 
-/* ================= LENS PILL (C11) ================= */
-.ledger-lens-pill {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: inline-block;
-  margin: 0 0 var(--space-16);
-  font-family: var(--font-mono);
-}
-.ledger-lens-pill-summary {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  list-style: none;
-  padding: 6px 12px;
-  font-size: var(--text-11);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  background: var(--paper-lift);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-ledger);
-}
-.ledger-lens-pill-summary::-webkit-details-marker {
-  display: none;
-}
-.ledger-lens-pill-summary strong {
-  color: var(--ink);
-  font-weight: 500;
-}
-.ledger-lens-pill-menu {
-  display: flex;
-  flex-direction: column;
-  margin-top: 4px;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-ledger);
-  background: var(--paper-lift);
-  overflow: hidden;
-  min-width: 200px;
-}
-.ledger-lens-pill-option {
-  text-align: left;
-  padding: 8px 12px;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  font-family: var(--font-body);
-  font-size: var(--text-13);
-  color: var(--ink);
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--rule);
-  cursor: pointer;
-}
-.ledger-lens-pill-option:last-child {
-  border-bottom: none;
-}
-.ledger-lens-pill-option:hover,
-.ledger-lens-pill-option.is-active {
-  background: var(--paper);
-}
-.ledger-lens-pill-option.is-active {
-  font-weight: 600;
-}
+/* The lens pill (C11) styles moved to site-chrome.css — the pill now lives
+   inside the shared sticky SiteHeader, which every route loads via
+   LedgerShell, so its CSS must load on every route too (this file is only
+   imported by the landing + case routes, not the two product routes). */
 
 /* ================= HERO (C9) ================= */
 .ledger-hero-block {

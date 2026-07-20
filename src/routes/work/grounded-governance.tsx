@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
 import { LedgerShell } from "../../components/layout/ledger-shell";
-import { LensPill } from "../../components/lens/lens-pill";
 import { ArtifactFrame } from "../../components/product/artifact-frame";
 import { BlockRenderer } from "../../components/product/block-renderer";
 import { Prose } from "../../components/prose";
@@ -45,7 +44,6 @@ function GroundedGovernancePage() {
   return (
     <LensProvider initialLens={lens ?? null}>
       <LedgerShell>
-        <LensPill />
         <GroundedGovernanceEssay />
       </LedgerShell>
     </LensProvider>

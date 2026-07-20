@@ -4,6 +4,13 @@
    spacing, and fonts all come from the design tokens in src/styles.css. */
 
 .ledger-site-header {
+  position: sticky;
+  top: 0;
+  /* Above page content + grain (z1); below the skip link (z100). One opaque
+     bar so body content scrolls cleanly underneath instead of showing
+     through. */
+  z-index: 30;
+  background: var(--paper);
   border-bottom: 1px solid var(--rule);
 }
 .ledger-site-header-inner {
@@ -11,8 +18,13 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-16);
-  padding-top: 18px;
-  padding-bottom: 18px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.ledger-site-header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
 }
 .ledger-site-header-mark {
   font-family: var(--font-display);
@@ -96,10 +108,21 @@
 }
 
 @media (max-width: 600px) {
+  /* On phones the header stacks (mark line, then nav + pill). A sticky
+     stacked bar would eat too much of a short viewport, and the pill-overlap
+     bug this fix targets is already gone (the pill no longer floats), so the
+     header reverts to static here — it scrolls away like normal page chrome. */
+  .ledger-site-header {
+    position: static;
+  }
   .ledger-site-header-inner {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-12);
+  }
+  .ledger-site-header-right {
+    flex-wrap: wrap;
+    gap: var(--space-16) var(--space-24);
   }
   .ledger-site-header-nav {
     justify-content: flex-start;
@@ -110,4 +133,78 @@
     align-items: flex-start;
     gap: var(--space-16);
   }
+}
+
+/* ================= LENS PILL (C11) =================
+   Moved here from hero-lens.css: the pill lives inside SiteHeader now, so
+   its CSS must load on every route (LedgerShell imports this file), not
+   only the routes that pull in hero-lens.css. It no longer needs its own
+   `position: sticky` — the header is sticky and carries it. `position:
+   relative` anchors the dropdown, which is absolutely positioned so opening
+   it overlays content instead of growing the header. */
+.ledger-lens-pill {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-mono);
+}
+.ledger-lens-pill-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  list-style: none;
+  padding: 6px 12px;
+  font-size: var(--text-11);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: var(--paper-lift);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-ledger);
+}
+.ledger-lens-pill-summary::-webkit-details-marker {
+  display: none;
+}
+.ledger-lens-pill-summary strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+.ledger-lens-pill-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  /* Stronger rule (not a shadow — the design system forbids box-shadow, §13)
+     so the overlay reads as lifted off the content it covers. */
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-ledger);
+  background: var(--paper-lift);
+  overflow: hidden;
+  min-width: 200px;
+}
+.ledger-lens-pill-option {
+  text-align: left;
+  padding: 8px 12px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: var(--text-13);
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+}
+.ledger-lens-pill-option:last-child {
+  border-bottom: none;
+}
+.ledger-lens-pill-option:hover,
+.ledger-lens-pill-option.is-active {
+  background: var(--paper);
+}
+.ledger-lens-pill-option.is-active {
+  font-weight: 600;
 }

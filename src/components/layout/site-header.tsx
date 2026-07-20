@@ -1,7 +1,9 @@
+import { LensPill } from "../lens/lens-pill";
 import { profile } from "../../content/site-copy";
 
 /**
- * `SiteHeader` — the shared top bar rendered by `LedgerShell` on every page.
+ * `SiteHeader` — the shared, sticky top bar rendered by `LedgerShell` on
+ * every page.
  *
  * Its whole reason to exist is that interior pages (`/work/*`, `/case/*`)
  * were navigational dead ends: they carried no name, no way home, and no way
@@ -9,11 +11,14 @@ import { profile } from "../../content/site-copy";
  * bar. This bar gives every page an identity (the name is a home link) and a
  * path to the work and to contact.
  *
- * Deliberately NOT sticky: the `LensPill` already owns `position: sticky;
- * top: 0` inside the content column, and stacking two sticky bars at the same
- * offset fights for the same space. The header sits at the top of the page;
- * the persistent "Reading as" pill takes over once you scroll. The closing
- * `SiteFooter` covers the reach-out moment at the end of a long read.
+ * Sticky, and it OWNS the `LensPill`. Previously the pill was a separate
+ * `position: sticky` element floating inside the content column while this
+ * header stayed static — so on scroll the little pill detached and overlapped
+ * body text (two bars fighting for the top). Now there is one opaque sticky
+ * bar: nav on the right, the "Reading as" pill beside it, and body content
+ * scrolls cleanly underneath. Every route already wraps `LedgerShell` in a
+ * `LensProvider`, so the pill's `useLens()` always has a provider here. The
+ * closing `SiteFooter` still covers the reach-out moment at the end of a read.
  *
  * The name is a plain wordmark here (no photo — the photo lives in the hero
  * masthead and the contact block, per the hero's identity treatment), so on
@@ -22,7 +27,8 @@ import { profile } from "../../content/site-copy";
  *
  * Links are plain anchors to landing-section ids. From an interior page they
  * cross-navigate to `/` and scroll — robust and SSR-safe, no client-router
- * hash handling needed.
+ * hash handling needed. `scroll-padding-top` on the scroll root (styles.css)
+ * keeps anchored sections clear of the sticky bar.
  */
 export function SiteHeader() {
   return (
@@ -31,14 +37,17 @@ export function SiteHeader() {
         <a className="ledger-site-header-mark" href="/">
           {profile.name}
         </a>
-        <nav className="ledger-site-header-nav" aria-label="Primary">
-          <a href="/#work">Work</a>
-          <a href="/#numbers">The numbers</a>
-          <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
-            Résumé
-          </a>
-          <a href="/#contact">Contact</a>
-        </nav>
+        <div className="ledger-site-header-right">
+          <nav className="ledger-site-header-nav" aria-label="Primary">
+            <a href="/#work">Work</a>
+            <a href="/#numbers">The numbers</a>
+            <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
+              Résumé
+            </a>
+            <a href="/#contact">Contact</a>
+          </nav>
+          <LensPill />
+        </div>
       </div>
     </header>
   );
