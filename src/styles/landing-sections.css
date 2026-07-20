@@ -294,11 +294,13 @@
   min-width: 0;
 }
 .ledger-work-title {
+  display: block;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 14px;
 }
 .ledger-work-oneliner {
+  display: block;
   font-size: 12px;
   color: var(--ink-faint);
   margin-top: 2px;
