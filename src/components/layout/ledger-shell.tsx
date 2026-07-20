@@ -24,10 +24,15 @@ export function LedgerShell({
 }) {
   return (
     <div className="ledger-site">
+      <a className="ledger-skip-link" href="#main-content">
+        Skip to content
+      </a>
       <GrainOverlay />
       <div className="ledger-grid">
         <div className="ledger-margin-col">{marginContent}</div>
-        <div className="ledger-content-col">{children}</div>
+        <main className="ledger-content-col" id="main-content">
+          {children}
+        </main>
       </div>
     </div>
   );

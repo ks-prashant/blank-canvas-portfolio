@@ -367,15 +367,18 @@
   gap: var(--space-12);
 }
 .ledger-case-honesty-switch {
+  display: inline-block;
   background: none;
   border: none;
-  padding: 0;
   font-family: var(--font-mono);
   font-size: var(--text-12);
   color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
+  /* >=44px touch target (§13), hit area only. */
+  padding: 13px 0;
+  margin: -13px 0;
 }
 .ledger-case-honesty-adds {
   font-size: var(--text-12);

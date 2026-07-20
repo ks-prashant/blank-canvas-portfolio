@@ -17,7 +17,11 @@
   --paper-lift: #EFEFEA;
   --ink: #15181E;
   --ink-soft: #5C6169;
-  --ink-faint: #8B9098;
+  /* Darkened from the prototype's #8B9098 (2.59:1 on --paper, fails WCAG
+     AA's 4.5:1 for normal text) - #61656D clears 4.71:1 on --paper and
+     5.07:1 on --paper-lift, per the §13 a11y audit ahead of Step 7's ship.
+     Same blue-gray hue family as --ink/--ink-soft, just darker. */
+  --ink-faint: #61656D;
   --rule: #CFCFC8;
   --rule-strong: #B4B4AC;
   --red: #B23A26;
@@ -240,6 +244,27 @@
   line-height: 1.6;
   min-height: 100vh;
   position: relative;
+}
+
+/* Skip-to-content link (§13's a11y checklist) - visually hidden until
+   focused, first element in the DOM so it's first in tab order. */
+.ledger-skip-link {
+  position: absolute;
+  top: -100px;
+  left: 12px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 10px 16px;
+  text-decoration: none;
+  transition: top 150ms ease-out;
+}
+.ledger-skip-link:focus-visible {
+  top: 12px;
 }
 
 .ledger-grid {

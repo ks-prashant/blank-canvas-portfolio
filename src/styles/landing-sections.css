@@ -148,7 +148,10 @@
 .ledger-jmark {
   font-family: var(--font-mono);
   font-size: 11.5px;
-  padding: 6px 12px;
+  /* >=44px touch target (§13) - the visible chip stays compact, the
+     extra vertical padding just grows the hit area. */
+  padding: 13px 12px;
+  min-height: 44px;
   border: 1px solid var(--rule-strong);
   background: var(--paper);
   color: var(--ink-soft);
@@ -466,7 +469,7 @@
 }
 .ledger-score-row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 24px;
   align-items: baseline;
   padding: 14px 0;
@@ -491,6 +494,18 @@
   font-size: var(--text-17);
   text-align: right;
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 480px) {
+  /* Some metric "values" are descriptive strings, not short tabular
+     figures (e.g. "630 parents / 1,573 chunks, 5 frameworks") - forcing
+     nowrap on those caused sitewide horizontal scroll at 320-375px. Real
+     short numeric figures still read fine wrapped; they just don't need
+     to. */
+  .ledger-sv {
+    white-space: normal;
+    word-break: break-word;
+  }
 }
 .ledger-sgroup--cost .ledger-sv {
   color: var(--red);
@@ -602,6 +617,9 @@
   align-items: center;
 }
 .ledger-btn-solid {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   background: var(--ink);
   color: var(--paper);
   padding: 10px 20px;
@@ -615,6 +633,7 @@
   background: var(--red);
 }
 .ledger-link-line {
+  display: inline-block;
   font-family: var(--font-mono);
   font-size: var(--text-11);
   text-transform: uppercase;
@@ -623,6 +642,10 @@
   text-underline-offset: 3px;
   text-decoration-color: var(--rule-strong);
   color: var(--ink-soft);
+  /* >=44px touch target (§13), hit area only - text stays its
+     designed size, padding/negative-margin cancel the visual shift. */
+  padding: 13px 0;
+  margin: -13px 0;
 }
 .ledger-link-line:hover {
   text-decoration-color: var(--ink);
