@@ -72,10 +72,20 @@ export function LensPicker() {
           <LensSignature lens={lens} />
         </div>
       ) : (
-        <p className="ledger-lens-picker-unset">
-          No lens chosen yet — every section above and below is still reading in the plain, generalist
-          voice.
-        </p>
+        <div className="ledger-lens-picker-preview">
+          <p className="ledger-lens-picker-unset">
+            No lens chosen yet — every section above and below is still reading in the plain,
+            generalist voice. Here&rsquo;s what each one surfaces:
+          </p>
+          <div className="ledger-lens-preview-grid">
+            {lensPickerCopy.map((entry) => (
+              <div className="ledger-lens-preview-item" key={entry.lens}>
+                <p className="ledger-lens-preview-item-label">{entry.label}</p>
+                <LensSignature lens={entry.lens} />
+              </div>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

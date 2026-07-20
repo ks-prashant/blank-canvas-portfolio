@@ -393,6 +393,38 @@
   color: var(--ink-faint);
   font-style: italic;
 }
+/* The unlensed default's three-up preview (§ High #5 fix) — every visitor
+   who never picks a lens still sees what each one surfaces, instead of the
+   site's three signature visuals being invisible to the majority who never
+   interact with the picker. Reuses `LensSignature` unchanged, one call per
+   lens, so there's no separate "preview" visual language to maintain. */
+.ledger-lens-picker-preview {
+  margin-top: var(--space-8);
+}
+.ledger-lens-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-32);
+  margin-top: var(--space-24);
+  padding-top: var(--space-24);
+  border-top: 1px solid var(--rule);
+}
+.ledger-lens-preview-item-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  margin-bottom: var(--space-16);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule-strong);
+}
+@media (max-width: 820px) {
+  .ledger-lens-preview-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-32);
+  }
+}
 
 /* ================= TRADEOFF CARD (C17) ================= */
 .ledger-tradeoff-card {
