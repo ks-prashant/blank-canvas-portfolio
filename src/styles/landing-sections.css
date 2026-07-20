@@ -478,6 +478,21 @@
 .ledger-sgroup:last-child .ledger-score-row:last-child {
   border-bottom: 1px solid var(--rule);
 }
+.ledger-sp {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  text-decoration: none;
+  margin-bottom: 3px;
+}
+a.ledger-sp:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 .ledger-sl {
   font-family: var(--font-display);
   font-size: 16.5px;

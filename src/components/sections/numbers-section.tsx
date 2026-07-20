@@ -1,6 +1,6 @@
 import { metrics } from "../../content/metrics";
 import { projects } from "../../content/projects";
-import type { SourceLabel } from "../../content/types";
+import type { Project, SourceLabel } from "../../content/types";
 import { UnlensedMark } from "../lens/unlensed-mark";
 import { Prose } from "../../components/prose";
 import { SectionGrid, SectionHeading } from "./section-heading";
@@ -42,6 +42,32 @@ const GROUPS: { label: SourceLabel; title: string; description: string }[] = [
     description: "Reported against the bar that was set, not rounded up to it",
   },
 ];
+
+// Every metric row's `projectSlug` (already carried by the compiled pool)
+// resolves to a project href here, so a number sourced from two different
+// projects with the same label — e.g. two "Adoption" rows, two "Recruiter
+// time saved" rows — stops reading as a self-contradiction the moment its
+// source is visible. Tier 1/2 projects link to their real page (a number is
+// one click from its evidence, on-thesis for this whole site); Tier 3
+// one-liners have no page, so their tag renders as plain text.
+function projectHrefFor(project: Project): string | undefined {
+  if (project.essay) return `/work/${project.slug}`;
+  if (project.depth === "full") return `/case/${project.slug}`;
+  return undefined;
+}
+
+function MetricProjectTag({ projectSlug }: { projectSlug: string }) {
+  const project = projects.find((p) => p.slug === projectSlug);
+  if (!project) return null;
+  const href = projectHrefFor(project);
+  return href ? (
+    <a className="ledger-sp" href={href}>
+      {project.name}
+    </a>
+  ) : (
+    <span className="ledger-sp">{project.name}</span>
+  );
+}
 
 export function NumbersSection() {
   const voiceScreening = projects.find((p) => p.slug === "voice-screening");
@@ -85,6 +111,7 @@ export function NumbersSection() {
                 {rows.map(({ projectSlug, metric }) => (
                   <div className="ledger-score-row" key={projectSlug + metric.label}>
                     <div>
+                      <MetricProjectTag projectSlug={projectSlug} />
                       <div className="ledger-sl">{metric.label}</div>
                       <div className="ledger-sd">
                         <Prose text={metric.method + (metric.caveat ? ` — ${metric.caveat}` : "")} />
