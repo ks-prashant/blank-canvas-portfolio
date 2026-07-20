@@ -52,7 +52,7 @@ export const lensPickerCopy: LensPickerEntry[] = [
   {
     lens: "engineer",
     label: "Engineer",
-    theirDecision: "Can this PM reason about systems, or does he narrate them?",
+    theirDecision: "Can this PM reason about systems, or just narrate them?",
     currencyOfProof: "Specificity + admitted limits",
     argument: "Instructions drift. Structures hold. Here are the structures.",
   },

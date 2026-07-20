@@ -146,6 +146,26 @@ export const metrics: { projectSlug: string; metric: Metric }[] = [
     }
   },
   {
+    "projectSlug": "resume-shortlisting",
+    "metric": {
+      "label": "Recruiter productivity (suite-wide)",
+      "value": "+140%",
+      "method": "Resume-record figure, TopHire’s stated hiring-suite outcome across all four AI products together",
+      "sourceLabel": "directional",
+      "caveat": "Not isolated to this one product — an org-wide figure, not independently re-measured here."
+    }
+  },
+  {
+    "projectSlug": "resume-shortlisting",
+    "metric": {
+      "label": "Time-to-hire reduction (suite-wide)",
+      "value": "~25%",
+      "method": "Resume-record figure, TopHire’s stated hiring-suite outcome across all four AI products together",
+      "sourceLabel": "directional",
+      "caveat": "Not isolated to this one product — an org-wide figure, not independently re-measured here."
+    }
+  },
+  {
     "projectSlug": "drip-campaign",
     "metric": {
       "label": "Positive reply rate",
@@ -297,8 +317,9 @@ export const metrics: { projectSlug: string; metric: Metric }[] = [
     "metric": {
       "label": "AML transactions flagged/month",
       "value": "10,000+",
-      "method": "UK bank client, ~40% accuracy",
-      "sourceLabel": "directional"
+      "method": "UK bank client, ~40% flagging precision",
+      "sourceLabel": "directional",
+      "caveat": "A flagging-system precision rate, not an error rate — a compliance-triage system optimizes for catching true positives, not for avoiding false ones."
     }
   },
   {

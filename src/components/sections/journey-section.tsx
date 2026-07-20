@@ -15,8 +15,14 @@ import { Prose } from "../../components/prose";
  * Renders identically for every lens (BUILD-SPEC §4.1: "This part reads the
  * same for everyone — your history doesn't change by audience").
  */
+// Defaults to Phase 3 (TopHire, the most recent full-time role) rather than
+// Phase 1 (2016, the oldest and thinnest entry) — a first-time visitor who
+// never clicks anything should land on the most relevant role, not the
+// earliest one chronology happens to list first.
+const DEFAULT_OPEN = { p: 2, r: 0 };
+
 export function JourneySection() {
-  const [open, setOpen] = useState<{ p: number; r: number }>({ p: 0, r: 0 });
+  const [open, setOpen] = useState<{ p: number; r: number }>(DEFAULT_OPEN);
 
   return (
     <section className="ledger-journey-block ledger-rule-top" id="journey">
@@ -40,7 +46,7 @@ export function JourneySection() {
         <SectionHeading
           eyebrow="How I got here"
           heading="Nine years, five industries"
-          dek="Fintech, recruitment, marketplaces, ride-hailing, banking. Click any company to see what he actually did there."
+          dek="Fintech, recruitment, marketplaces, ride-hailing, banking. Click any company to see what I actually did there."
         />
 
         <div className="ledger-jline">

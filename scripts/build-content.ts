@@ -634,6 +634,8 @@ const PROJECT_META: ProjectMeta[] = [
     metrics: [
       { label: 'Shortlisting rate', value: '35% → 42%', method: 'A/B test, 5 jobs, ~400 candidates', sourceLabel: 'instrumented' },
       { label: 'Adoption', value: '80%+', method: 'Platform-wide usage', sourceLabel: 'instrumented' },
+      { label: 'Recruiter productivity (suite-wide)', value: '+140%', method: 'Resume-record figure, TopHire’s stated hiring-suite outcome across all four AI products together', sourceLabel: 'directional', caveat: 'Not isolated to this one product — an org-wide figure, not independently re-measured here.' },
+      { label: 'Time-to-hire reduction (suite-wide)', value: '~25%', method: 'Resume-record figure, TopHire’s stated hiring-suite outcome across all four AI products together', sourceLabel: 'directional', caveat: 'Not isolated to this one product — an org-wide figure, not independently re-measured here.' },
     ],
     principles: ['vendor-choice-is-an-experiment', 'north-star-plus-guardrail'],
     sourceFile: 'professional-experience/tophire/resume-shortlisting.md',
@@ -759,7 +761,7 @@ const PROJECT_META: ProjectMeta[] = [
     confidential: true,
     status: 'Completed, 2016-2019, resume-level source material',
     metrics: [
-      { label: 'AML transactions flagged/month', value: '10,000+', method: 'UK bank client, ~40% accuracy', sourceLabel: 'directional' },
+      { label: 'AML transactions flagged/month', value: '10,000+', method: 'UK bank client, ~40% flagging precision', sourceLabel: 'directional', caveat: 'A flagging-system precision rate, not an error rate — a compliance-triage system optimizes for catching true positives, not for avoiding false ones.' },
       { label: 'Dealership PAT lift', value: '~6 pts', method: 'Prashaste business evaluations, 6 dealerships, implemented directly', sourceLabel: 'instrumented' },
     ],
     principles: [],

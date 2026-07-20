@@ -1301,6 +1301,20 @@ export const projects: Project[] = [
         "value": "80%+",
         "method": "Platform-wide usage",
         "sourceLabel": "instrumented"
+      },
+      {
+        "label": "Recruiter productivity (suite-wide)",
+        "value": "+140%",
+        "method": "Resume-record figure, TopHire’s stated hiring-suite outcome across all four AI products together",
+        "sourceLabel": "directional",
+        "caveat": "Not isolated to this one product — an org-wide figure, not independently re-measured here."
+      },
+      {
+        "label": "Time-to-hire reduction (suite-wide)",
+        "value": "~25%",
+        "method": "Resume-record figure, TopHire’s stated hiring-suite outcome across all four AI products together",
+        "sourceLabel": "directional",
+        "caveat": "Not isolated to this one product — an org-wide figure, not independently re-measured here."
       }
     ],
     "principles": [
@@ -2348,8 +2362,9 @@ export const projects: Project[] = [
       {
         "label": "AML transactions flagged/month",
         "value": "10,000+",
-        "method": "UK bank client, ~40% accuracy",
-        "sourceLabel": "directional"
+        "method": "UK bank client, ~40% flagging precision",
+        "sourceLabel": "directional",
+        "caveat": "A flagging-system precision rate, not an error rate — a compliance-triage system optimizes for catching true positives, not for avoiding false ones."
       },
       {
         "label": "Dealership PAT lift",

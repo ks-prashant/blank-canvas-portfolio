@@ -36,21 +36,21 @@ export const journey: JourneyPhase[] = [
       {
         company: "Infosys",
         title: "Business Analyst · 05/2016–10/2017",
-        body: "Anti-money-laundering workflows for a UK bank client — the first classification system he built with a stated accuracy figure, in a domain where compliance mattered more than speed.",
-        numbers: ["10,000+ transactions/mo flagged", "~40% accuracy", "top 1% of 600+ trainees"],
+        body: "Anti-money-laundering workflows for a UK bank client — the first classification system I built with a stated accuracy figure, in a domain where compliance mattered more than speed.",
+        numbers: ["10,000+ transactions/mo flagged", "~40% flagging precision", "top 1% of 600+ trainees"],
         source: "02-career-timeline.md §Infosys",
       },
       {
         company: "Prashaste",
         title: "Associate Consultant · 11/2017–01/2019",
-        body: "Consulting for auto dealerships of Fortune 500 automakers — a broad tooling rollout, plus six deep engagements where he implemented the changes himself rather than only handing over a report.",
+        body: "Consulting for auto dealerships of Fortune 500 automakers — a broad tooling rollout, plus six deep engagements where I implemented the changes myself rather than only handing over a report.",
         numbers: ["200+ dealerships", "25+ training sessions", "+6pp monthly PAT lift"],
         source: "02-career-timeline.md §Prashaste",
       },
       {
         company: "Ola",
         title: "Product Analyst · 04/2019–04/2021",
-        body: "His one classical machine-learning project: a decision-tree model on driver behavior to predict fares upfront, plus an end-to-end simulation of the billing workflow to coordinate compliance fixes.",
+        body: "My one classical machine-learning project: a decision-tree model on driver behavior to predict fares upfront, plus an end-to-end simulation of the billing workflow to coordinate compliance fixes.",
         numbers: ["$200k/yr disputes cut", "−40% complaints", "91%→99% bill accuracy"],
         source: "02-career-timeline.md §Ola",
       },
@@ -78,7 +78,7 @@ export const journey: JourneyPhase[] = [
       {
         company: "TopHire",
         title: "Product Manager · reported to the CEO · 04/2023–05/2026",
-        body: "Owned the entire B2B AI product suite. Shipped four AI products, each chosen by where recruiter time was going next. The product org contracted the whole time he was there — 2 PMs and 7–8 engineers when he joined, down to him as the solo PM with 3–4 engineers by the end.",
+        body: "Owned the entire B2B AI product suite. Shipped four AI products, each chosen by where recruiter time was going next. The product org contracted the whole time I was there — 2 PMs and 7–8 engineers when I joined, down to me as the solo PM with 3–4 engineers by the end.",
         numbers: ["+140% recruiter productivity", "~25% faster time-to-hire", "$100k/yr saved"],
         source: "02-career-timeline.md §TopHire; 01-identity.md §\"Why he left TopHire\"",
       },
@@ -133,21 +133,21 @@ export const faq: FaqItem[] = [
   {
     question: "What are you looking for next?",
     answer: [
-      "Deliberately kept open — target role and level, company stage, domain, location and remote stance are all things he'd rather discuss directly, case by case, than pre-filter here.",
+      "Deliberately kept open — target role and level, company stage, domain, location and remote stance are all things I'd rather discuss directly, case by case, than pre-filter here.",
     ],
     source: "01-identity.md §\"Current status\"",
   },
   {
     question: "Why did you leave TopHire?",
     answer: [
-      "Structural, not a grievance. The product org went from 2 PMs and 7–8 engineers when he joined to him alone with 3–4 engineers by the end of his three years there. A shrinking org caps what a PM inside it can take on — the four AI products and the +140% productivity figure all came out of that same contracting period, which if anything makes them more notable, not less.",
+      "Structural, not a grievance. The product org went from 2 PMs and 7–8 engineers when I joined to me alone with 3–4 engineers by the end of my three years there. A shrinking org caps what a PM inside it can take on — the four AI products and the +140% productivity figure all came out of that same contracting period, which if anything makes them more notable, not less.",
     ],
     source: "01-identity.md §\"Why he left TopHire\"",
   },
   {
     question: "Why leave without another offer lined up?",
     answer: [
-      "He couldn't run a serious interview process as the solo PM on a contracting team, so he sequenced it deliberately instead of trying to overlap the two: leave, spend the break building and learning hands-on, then interview.",
+      "I couldn't run a serious interview process as the solo PM on a contracting team, so I sequenced it deliberately instead of trying to overlap the two: leave, spend the break building and learning hands-on, then interview.",
     ],
     tradeoff: {
       buys: "Full attention on the search. Two live products built during the break (Automjet, Grounded Governance).",
@@ -158,14 +158,14 @@ export const faq: FaqItem[] = [
   {
     question: "Why not Senior PM after this many years?",
     answer: [
-      "About 9.5 years of total experience, of which roughly 5 were specifically in a Product Manager title (nurture.farm and TopHire) — the earlier years were analyst and consulting roles that built the foundation. His title has been Product Manager throughout, never \"Senior\" — stating that plainly beats inflating a title that isn't on the record.",
+      "About 9.5 years of total experience, of which roughly 5 were specifically in a Product Manager title (nurture.farm and TopHire) — the earlier years were analyst and consulting roles that built the foundation. My title has been Product Manager throughout, never \"Senior\" — stating that plainly beats inflating a title that isn't on the record.",
     ],
     source: "01-identity.md §\"Current status\"; 06-positioning.md §\"Key facts to hold precisely\"",
   },
   {
     question: "Can I see the code or prompts from the TopHire products?",
     answer: [
-      "No — those are internal TopHire builds and the production prompts are TopHire's IP, not his to publish. He'll describe the technique in as much depth as anyone wants; the artifact itself doesn't get pasted. Automjet and Grounded Governance are the two products where architecture, build documents, and records are fully his to share — that asymmetry is why this site's centrepiece is built on them.",
+      "No — those are internal TopHire builds and the production prompts are TopHire's IP, not mine to publish. I'll describe the technique in as much depth as anyone wants; the artifact itself doesn't get pasted. Automjet and Grounded Governance are the two products where architecture, build documents, and records are fully mine to share — that asymmetry is why this site's centrepiece is built on them.",
     ],
     source: "BUILD-SPEC.md §7.3",
   },
