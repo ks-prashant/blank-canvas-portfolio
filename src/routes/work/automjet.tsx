@@ -119,15 +119,6 @@ function AutomjetEssay() {
             </p>
           ) : null}
 
-          {quoteBlock && !quoteAlreadyComposed ? (
-            <aside className="ledger-artifact-quote" aria-label="The closing line, verbatim">
-              <p className="ledger-artifact-quote-label">The closing line, verbatim</p>
-              <blockquote>
-                <Prose text={quoteBlock.body} />
-              </blockquote>
-            </aside>
-          ) : null}
-
           <BlockRenderer
             composed={composed.blocks}
             slug="automjet"
@@ -141,6 +132,22 @@ function AutomjetEssay() {
                 Try it live ↗
               </a>
             </p>
+          ) : null}
+
+          {/* The verbatim quote reads as a conclusion, not an opener — and
+              the recruiter genre's own promise ("60-90 sec read, plain
+              language, outcome-first") is broken by a dense abstraction in
+              its first ten seconds. So it's omitted from the record genre
+              entirely and placed last for memo; the engineer/review genre
+              already composes it in-flow via BlockRenderer (automjet-19),
+              so `quoteAlreadyComposed` keeps this from duplicating there. */}
+          {quoteBlock && !quoteAlreadyComposed && composed.genre !== "record" ? (
+            <aside className="ledger-artifact-quote" aria-label="The closing line, verbatim">
+              <p className="ledger-artifact-quote-label">The closing line, verbatim</p>
+              <blockquote>
+                <Prose text={quoteBlock.body} />
+              </blockquote>
+            </aside>
           ) : null}
         </ArtifactFrame>
       </article>

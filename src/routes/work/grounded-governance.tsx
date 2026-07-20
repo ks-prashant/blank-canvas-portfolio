@@ -103,15 +103,6 @@ function GroundedGovernanceEssay() {
           productName="Grounded Governance"
           dek="A source-grounded AI-governance research assistant. Live at pact-wise-guide.lovable.app."
         >
-          {quoteBlock ? (
-            <aside className="ledger-artifact-quote" aria-label="From the build plan, verbatim">
-              <p className="ledger-artifact-quote-label">From the build plan, verbatim</p>
-              <blockquote>
-                <Prose text={quoteBlock.body} />
-              </blockquote>
-            </aside>
-          ) : null}
-
           <BlockRenderer composed={composed.blocks} slug="grounded-governance" metrics={project.metrics} />
 
           {project.liveUrl ? (
@@ -120,6 +111,20 @@ function GroundedGovernanceEssay() {
                 Try it live ↗
               </a>
             </p>
+          ) : null}
+
+          {/* The verbatim quote reads as a conclusion, not an opener — and
+              the recruiter genre's own promise ("60-90 sec read, plain
+              language, outcome-first") is broken by a dense abstraction in
+              its first ten seconds. So it's omitted from the record genre
+              entirely and placed last, after the blocks, for memo/review. */}
+          {quoteBlock && composed.genre !== "record" ? (
+            <aside className="ledger-artifact-quote" aria-label="From the build plan, verbatim">
+              <p className="ledger-artifact-quote-label">From the build plan, verbatim</p>
+              <blockquote>
+                <Prose text={quoteBlock.body} />
+              </blockquote>
+            </aside>
           ) : null}
         </ArtifactFrame>
       </article>
