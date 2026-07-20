@@ -8,7 +8,7 @@ import { CaseSections } from "../../components/case/case-sections";
 import { CaseSignatureVisual } from "../../components/case/case-signature-visual";
 import { CaseSummary } from "../../components/case/case-summary";
 import { LensPill } from "../../components/lens/lens-pill";
-import { LENS_LABELS, LensProvider, useLens } from "../../content/lens-context";
+import { LENS_LABELS, LensProvider, useLens, validateLensSearch } from "../../content/lens-context";
 import { projects } from "../../content/projects";
 import type { Project } from "../../content/types";
 import "../../styles/hero-lens.css";
@@ -41,6 +41,7 @@ function isCasePageProject(project: Project | undefined): project is Project {
 }
 
 export const Route = createFileRoute("/case/$slug")({
+  validateSearch: validateLensSearch,
   loader: ({ params }) => {
     const project = projects.find((p) => p.slug === params.slug);
     if (!isCasePageProject(project)) {
@@ -75,9 +76,10 @@ const DEFAULT_CASE_LENS = "operator" as const;
 
 function CasePageRoute() {
   const { project } = Route.useLoaderData();
+  const { lens } = Route.useSearch();
 
   return (
-    <LensProvider>
+    <LensProvider initialLens={lens ?? null}>
       <LedgerShell>
         <LensPill />
         <CasePage project={project} />

@@ -54,14 +54,18 @@ export function CaseHonestyFooter({
       </p>
       <ul className="ledger-case-honesty-list">
         {otherLenses.map((lens) => {
-          const additions = whatThisLensAdds(activeLens, lens, lensesData);
+          const { added, deepened } = whatThisLensAdds(activeLens, lens, lensesData);
           return (
             <li key={lens} className="ledger-case-honesty-row">
               <button type="button" className="ledger-case-honesty-switch" onClick={() => onSwitch(lens)}>
                 Read this page as {LENS_LABELS[lens]} →
               </button>
-              {additions.length > 0 ? (
-                <span className="ledger-case-honesty-adds">adds: {additions.join(", ")}</span>
+              {added.length > 0 || deepened.length > 0 ? (
+                <span className="ledger-case-honesty-adds">
+                  {added.length > 0 ? <>adds: {added.join(", ")}</> : null}
+                  {added.length > 0 && deepened.length > 0 ? " · " : null}
+                  {deepened.length > 0 ? <>goes deeper on: {deepened.join(", ")}</> : null}
+                </span>
               ) : (
                 <span className="ledger-case-honesty-adds">a different argument over the same sections</span>
               )}
@@ -73,16 +77,39 @@ export function CaseHonestyFooter({
   );
 }
 
-function whatThisLensAdds(activeLens: Lens, otherLens: Lens, lensesData: Record<Lens, LensCopy>): string[] {
+/**
+ * Distinguishes two genuinely different claims that the old single-list
+ * version conflated: a section the active lens doesn't show *at all*
+ * (`omit`, a real addition) versus a section both lenses show but the
+ * other lens goes deeper on (`short` here, `full` there — already visible,
+ * just thinner). Confirmed live: the engineer lens already renders "The
+ * problem" / "Discovery" / "The decision" as full headings with prose (at
+ * `depth: 'short'`, which still renders a heading and body — see
+ * `CaseSections`), so claiming Founder/PM "adds" them was false; it goes
+ * deeper on them.
+ */
+function whatThisLensAdds(
+  activeLens: Lens,
+  otherLens: Lens,
+  lensesData: Record<Lens, LensCopy>,
+): { added: string[]; deepened: string[] } {
   const otherSections = lensesData[otherLens].sections ?? [];
   const activeSections = lensesData[activeLens].sections ?? [];
   const activeByKind = new Map(activeSections.map((s) => [s.kind, s.depth]));
 
-  return otherSections
-    .filter((s) => s.depth === "full")
-    .filter((s) => {
-      const activeDepth = activeByKind.get(s.kind);
-      return activeDepth !== "full";
-    })
-    .map((s) => KIND_LABELS[s.kind] ?? s.kind);
+  const added: string[] = [];
+  const deepened: string[] = [];
+
+  for (const s of otherSections) {
+    if (s.depth === "omit") continue;
+    const activeDepth = activeByKind.get(s.kind) ?? "omit";
+    const label = KIND_LABELS[s.kind] ?? s.kind;
+    if (activeDepth === "omit") {
+      added.push(label);
+    } else if (s.depth === "full" && activeDepth === "short") {
+      deepened.push(label);
+    }
+  }
+
+  return { added, deepened };
 }

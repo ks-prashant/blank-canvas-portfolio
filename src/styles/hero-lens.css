@@ -314,6 +314,12 @@
   max-width: 20ch;
   color: var(--ink);
 }
+.ledger-lens-picker-mechanics {
+  margin-top: var(--space-8);
+  font-size: var(--text-13);
+  color: var(--ink-faint);
+  max-width: 52ch;
+}
 .ledger-lens-picker-body {
   display: grid;
   grid-template-columns: 2fr 1fr;

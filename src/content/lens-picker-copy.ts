@@ -68,7 +68,7 @@ export const heroReceipts: Record<Lens, string> = {
   recruiter:
     "Reading as Recruiter: outcomes and evidence strength lead; decisions and architecture are trimmed to what's needed to trust the number.",
   operator:
-    "Reading as Founder/PM: the decisions and their costs lead — this is the richest, most-recommended view.",
+    "Reading as Founder/PM: the decisions and their costs lead — the richest source material of the three, since nine years of product decisions is what there's the most of to draw on.",
   engineer:
     "Reading as Engineer: mechanism and admitted limits lead; business framing is held to one line, per the engineer lens's own rule.",
 };

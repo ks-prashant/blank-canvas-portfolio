@@ -25,6 +25,10 @@ export function LensPicker() {
       <p className="ledger-lens-picker-prompt">
         One question, so this reads the way you need it to.
       </p>
+      <p className="ledger-lens-picker-mechanics">
+        Picking one re-composes the page around it — nothing is deleted, and you can switch anytime
+        from the pill at the top of the page.
+      </p>
 
       <div className="ledger-lens-picker-body">
         <div className="ledger-lens-options" role="radiogroup" aria-label="Choose how to read this site">
@@ -42,7 +46,7 @@ export function LensPicker() {
                 <span className="ledger-lens-option-label">{entry.label}</span>
                 <span className="ledger-lens-option-decision">{entry.theirDecision}</span>
                 <span className="ledger-lens-option-currency">
-                  Currency of proof: {entry.currencyOfProof}
+                  What convinces them: {entry.currencyOfProof}
                 </span>
                 <span className="ledger-lens-option-argument">&ldquo;{entry.argument}&rdquo;</span>
               </button>
