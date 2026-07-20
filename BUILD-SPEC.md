@@ -103,7 +103,7 @@ Three facts from the knowledge book drive the entire design:
   #journey                How I got here — the nine-year arc, expandable role detail.
   #work                   Everything I've built — 13 projects, grouped by org, tiered.
   #principles             The patterns that repeat — 8 principles in 4 themed groups.
-  #numbers                The audit — every metric, grouped by evidence strength.
+  #numbers                The audit — every metric, grouped by company (north-star first), each row evidence-tagged.
   #questions              Straight answers — FAQ, including the direct/hard questions.
   #contact                Next step.
 
@@ -220,7 +220,7 @@ Design language originates from the *logic* of Prashant's own build documents (b
 | C12 | `CompareModal` | Shows all three lens versions of one block side by side | §8.4 |
 | C13 | `JourneyLine` | The drawn timeline with clickable company marks | Detail expands in place, not a separate page |
 | C14 | `PrincipleGroup` / `PrincipleItem` | The 4-themed, 8-item expandable list | Evidence chips per item |
-| C15 | `AuditGroup` / `ScoreRow` | The numbers section, grouped by evidence strength (Measured / Directional / Fell short / Not a number) | Red only on the last two groups |
+| C15 | `AuditGroup` / `ScoreRow` | The numbers section. **Grouped by company (post-V1 review, task #6)**, each cluster led by the north-star metric I owned with supporting metrics collapsed; each row carries a per-row evidence tag (Measured / Directional / Fell short). The documented "no" is a featured block below the clusters | Red only where a cost is declared (a "Fell short" tag/value, the featured "no") |
 | C16 | `SourceTag` | Inline honesty label wherever a number appears | `instrumented` / `directional` / `disclosed-gap` |
 | C17 | `TradeoffCard` | Generic buys/costs block | Used for "left without an offer," "no runtime LLM," etc. |
 | C18 | `LiveProductEntry` | The two live-product rows | Pulsing ink dot (not colored), plain-language metric line, "Open the build →" + "Try it live ↗" |
@@ -789,7 +789,7 @@ Read this before touching a section, so nothing correct gets rebuilt and nothing
 | **Journey / career line** | **Keep**, re-source content | Structure valid; unlensed per `lens-copy.md` |
 | **Work index** (tiered rows) | **Keep**, new roster | Tier 1 is now `automjet` + `grounded-governance` (§7.4) |
 | **Principles** (8 in 4 groups) | **Keep** | Unchanged; now also the founder lens's operating-system section |
-| **Numbers / audit** (evidence-strength groups) | **Keep, and promote** | Unchanged — and it's now the *entire* recruiter argument (§8.6) |
+| **Numbers / audit** | **Keep, promote, and (post-V1) regroup by company** | Now company clusters, north-star first, per-row evidence tags (task #6); still the *entire* recruiter argument (§8.6) |
 | **Questions, contact** | **Keep** | Unchanged |
 | **Live-product entries** | **Keep shell, replace content** | Same component, two different products |
 | **Lens picker** | **Keep shell, deepen** | Prototype is rung 1 (copy swap); target is rung 3 + the un-lensed default (§4.1, §8.6) |
@@ -1036,7 +1036,7 @@ programmatically at build time.
 1. A stranger reaches a real URL and, in 90 seconds, learns what he does, sees two live products, and can open one full case study.
 2. Every number on the site carries a visible source label.
 3. `#principles` shows eight principles in four themed groups, each with evidence from **2+ different companies**.
-4. `#numbers` (the audit) features the voice-screening "said no" row prominently, in its own evidence-strength group.
+4. `#numbers` (the audit) features the voice-screening "said no" prominently, as its own featured block below the company clusters.
 5. `#journey` and `#questions` together address the career questions directly and calmly — no dedicated "story" page that reads as a confession booth.
 6. Zero network requests to any LLM, at any point. Verified in devtools.
 7. Lighthouse a11y ≥ 95. No horizontal scroll at 375px.

@@ -114,8 +114,9 @@ WORK          medium  13 ruled rows, tiered by depth. a list, not cards.
 PRINCIPLES   ~70vh   8 statements grouped into 4 themes, ruled. bodies exist but
                      start collapsed — click to expand. not bodiless, just quiet
                      until asked.
-NUMBERS       dense   the proof. tabular, grouped by evidence strength
-                     (Measured / Directional / Fell short / Not a number).
+NUMBERS       dense   the proof. tabular, grouped by company (north-star
+                     metric first, rest collapsed), each row evidence-tagged
+                     (Measured / Directional / Fell short). Post-V1 task #6.
 QUESTIONS     airy    all collapsed by default. 7 lines visible.
 CONTACT      ~60vh   ~60% air.
 ```

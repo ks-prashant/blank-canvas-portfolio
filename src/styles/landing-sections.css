@@ -533,6 +533,73 @@ a.ledger-sp:hover {
 .ledger-sgroup--cost .ledger-sv {
   color: var(--red);
 }
+
+/* ---- Org clusters (task #6): group by company, north-star first ---- */
+.ledger-org-cluster {
+  margin-top: 34px;
+}
+.ledger-org-head--cost {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: var(--red);
+}
+.ledger-org-cluster--featured {
+  margin-top: 40px;
+  border-top: 1px solid var(--rule-strong);
+  padding-top: 6px;
+}
+/* Right column: the value, with its small evidence tag beneath it. */
+.ledger-sv-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  text-align: right;
+}
+.ledger-metric-tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-9_5);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+.ledger-metric-tag--cost {
+  color: var(--red);
+}
+.ledger-score-row--cost .ledger-sv {
+  color: var(--red);
+}
+/* Supporting metrics, collapsed until asked for. */
+.ledger-metrics-more {
+  margin-top: 2px;
+}
+.ledger-metrics-more-summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  /* >=44px touch target without shifting layout. */
+  padding: 14px 0;
+  margin: -6px 0;
+  display: inline-block;
+}
+.ledger-metrics-more-summary::-webkit-details-marker {
+  display: none;
+}
+.ledger-metrics-more-summary:hover {
+  color: var(--ink);
+}
+.ledger-metrics-more[open] .ledger-metrics-more-summary {
+  color: var(--ink-faint);
+}
 .ledger-numbers-note {
   font-size: var(--text-13_5);
   color: var(--ink-soft);
