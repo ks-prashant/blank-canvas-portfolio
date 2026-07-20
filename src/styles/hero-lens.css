@@ -18,7 +18,7 @@
 
 /* ================= HERO (C9) ================= */
 .ledger-hero-block {
-  padding: 48px 0 72px;
+  padding: 28px 0 56px;
 }
 /* Identity masthead — name + role + photo, above the counter-entry mark.
    Answers "who is this" in the first viewport (the page had no name before). */
@@ -26,7 +26,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-16);
-  margin-bottom: var(--space-48);
+  margin-bottom: var(--space-24);
 }
 .ledger-masthead-avatar {
   flex: none;
@@ -59,14 +59,18 @@
   }
 }
 .ledger-hero-mark {
-  padding-bottom: var(--space-32);
+  padding-bottom: var(--space-24);
 }
 .ledger-hero-mark-row {
   display: flex;
   align-items: flex-end;
   gap: 10px;
-  height: 200px;
-  margin-bottom: var(--space-32);
+  /* The tallest mark pair is ~97px (see MARK_PAIRS in hero-section.tsx); the
+     old 200px row left ~100px of dead space above the marks, pushing the
+     live-product proof below the fold. Sized just above the tallest pair
+     (task #5). */
+  height: 108px;
+  margin-bottom: var(--space-24);
 }
 .ledger-hero-mark-pair {
   display: flex;
@@ -145,7 +149,7 @@
   display: flex;
   flex-direction: column;
   border-top: 1px solid var(--rule);
-  margin: var(--space-48) 0;
+  margin: var(--space-32) 0;
 }
 .ledger-live-entry {
   display: flex;
