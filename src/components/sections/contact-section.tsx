@@ -1,17 +1,17 @@
-import { contact } from "../../content/site-copy";
+import { contact, profile } from "../../content/site-copy";
 import { SectionGrid } from "./section-heading";
 import { Prose } from "../../components/prose";
 
 /**
- * `#contact` — next step (BUILD-SPEC §11.1: "Keep" — unchanged). Structure
- * ported from the prototype's `.contact-row`/`.btn-solid`/`.link-line`
- * build; content re-sourced from `knowledge-book/01-identity.md` via
- * `src/content/site-copy.ts` (no typed pipeline module for contact info
- * yet — same flagged gap as `#journey` and `#questions`).
+ * `#contact` — next step (BUILD-SPEC §11.1: "Keep"). Structure ported from
+ * the prototype's `.contact-row`/`.btn-solid`/`.link-line` build; content
+ * re-sourced from `knowledge-book/01-identity.md` via
+ * `src/content/site-copy.ts`.
  *
- * The prototype's `.contact-ava` (a profile photo) is intentionally
- * dropped here — no photo asset was supplied to this build step, and an
- * empty/broken `<img>` would be worse than omitting it.
+ * The prototype's `.contact-ava` (a profile photo) is restored now that a
+ * photo asset exists (public/prashant-singh.jpg), alongside the name, so the
+ * page closes with a face and an identity rather than two bare links — and a
+ * resume download, the recruiter's most common ask, which the page lacked.
  */
 export function ContactSection() {
   return (
@@ -22,10 +22,28 @@ export function ContactSection() {
           Next step
         </p>
         <div className="ledger-contact-row">
-          <div className="ledger-contact-line"><Prose text={contact.line} /></div>
+          <img
+            className="ledger-contact-avatar"
+            src={profile.avatarUrl}
+            width={56}
+            height={56}
+            alt={profile.name}
+          />
+          <div className="ledger-contact-line">
+            <p className="ledger-contact-name">{profile.name}</p>
+            <Prose text={contact.line} />
+          </div>
           <div className="ledger-contact-actions">
             <a className="ledger-btn-solid" href={`mailto:${contact.email}`}>
               Email
+            </a>
+            <a
+              className="ledger-link-line"
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Résumé (PDF)
             </a>
             <a
               className="ledger-link-line"

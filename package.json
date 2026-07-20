@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "content:build": "bun run scripts/build-content.ts",
-    "qa:check": "bun run scripts/qa/check-confidential.ts && bun run scripts/qa/check-duplicate-visuals.ts"
+    "qa:check": "bun run scripts/qa/check-confidential.ts && bun run scripts/qa/check-duplicate-visuals.ts && bun run scripts/qa/check-placeholders.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

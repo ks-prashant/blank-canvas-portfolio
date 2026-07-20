@@ -4,6 +4,7 @@ import { useLens } from "../../content/lens-context";
 import { LensPicker } from "../../components/lens/lens-picker";
 import { LensReceipt } from "../../components/lens/lens-receipt";
 import { projects } from "../../content/projects";
+import { profile } from "../../content/site-copy";
 import type { Lens, Project } from "../../content/types";
 import { Prose } from "../../components/prose";
 
@@ -23,10 +24,41 @@ import { Prose } from "../../components/prose";
 export function HeroSection() {
   return (
     <section className="ledger-hero-block" id="top">
+      <HeroMasthead />
       <HeroCounterEntry />
       <LiveProductEntries />
       <LensPicker />
     </section>
+  );
+}
+
+/**
+ * `HeroMasthead` — identity before thesis. The recruiter's first-30-seconds
+ * question ("who is this, what do they do") answered in the first viewport,
+ * which the page previously never did (no name appeared anywhere). The name
+ * is the page's single <h1> for humans and search; the thesis line below is
+ * demoted to a styled <p> so it stays the visual hero without competing for
+ * the document's one top-level heading. Photo is the supplied LinkedIn DP
+ * (public/prashant-singh.jpg), decorative-adjacent but given a real alt for
+ * anyone who lands on the name via search or a screen reader.
+ */
+function HeroMasthead() {
+  return (
+    <div className="ledger-masthead">
+      <img
+        className="ledger-masthead-avatar"
+        src={profile.avatarUrl}
+        width={72}
+        height={72}
+        alt={`${profile.name}, ${profile.role}`}
+      />
+      <div className="ledger-masthead-id">
+        <h1 className="ledger-masthead-name">{profile.name}</h1>
+        <p className="ledger-masthead-role">
+          {profile.role} · {profile.location}
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -69,10 +101,10 @@ function HeroCounterEntry() {
           </span>
         ))}
       </div>
-      <h1 className="ledger-hero-thesis">
+      <p className="ledger-hero-thesis">
         I build systems that stay honest under pressure. Two are in production. You&rsquo;re reading
         the third.
-      </h1>
+      </p>
       <HeroSubCopy />
     </div>
   );

@@ -1,6 +1,9 @@
 import type { ReactNode } from "react";
 
 import { GrainOverlay } from "./grain-overlay";
+import { SiteHeader } from "./site-header";
+import { SiteFooter } from "./site-footer";
+import "../../styles/site-chrome.css";
 
 /**
  * Bare page shell for The Ledger design system (BUILD-SPEC §5.4).
@@ -28,12 +31,14 @@ export function LedgerShell({
         Skip to content
       </a>
       <GrainOverlay />
+      <SiteHeader />
       <div className="ledger-grid">
         <div className="ledger-margin-col">{marginContent}</div>
         <main className="ledger-content-col" id="main-content">
           {children}
         </main>
       </div>
+      <SiteFooter />
     </div>
   );
 }

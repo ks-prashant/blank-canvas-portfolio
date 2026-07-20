@@ -190,3 +190,17 @@ export const contact = {
   linkedinLabel: "LinkedIn",
   linkedinUrl: "https://linkedin.com/in/prashantaspx",
 };
+
+// Constant identity, shown in the hero masthead and the contact block (and
+// reused by the interior-page header). Name + role are the site's answer to
+// the recruiter's first 30-second question ("who is this, what do they do");
+// the role line is the unlensed self-description already used in the hero
+// copy, kept constant across lenses. Asset paths are the copies placed in
+// public/. knowledge-book/01-identity.md §"Core identity", §"Location".
+export const profile = {
+  name: "Prashant Singh",
+  role: "AI Product Manager & Builder",
+  location: "Bengaluru",
+  avatarUrl: "/prashant-singh.jpg",
+  resumeUrl: "/prashant-singh-resume.pdf",
+};

@@ -77,14 +77,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Prashant Singh — AI Product Manager & Builder" },
+      {
+        name: "description",
+        content:
+          "AI Product Manager who writes the backend. Nine years across fintech, HR tech, marketplaces and regulated banking, plus two live AI products built solo. Every claim tagged by how it was measured.",
+      },
+      { name: "author", content: "Prashant Singh" },
+      { property: "og:title", content: "Prashant Singh — AI Product Manager & Builder" },
+      {
+        property: "og:description",
+        content:
+          "Nine years of product decisions with the costs kept on the books, and two live AI systems built solo. Every claim tagged by how it was measured.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:image", content: "/prashant-singh.jpg" },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:image", content: "/prashant-singh.jpg" },
     ],
     links: [
       {

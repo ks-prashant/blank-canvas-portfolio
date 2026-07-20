@@ -255,7 +255,7 @@ export function AnnotatedTranscript({ recording }: { recording: Recording }) {
         </audio>
       ) : (
         <p className="ledger-annotated-transcript-fallback">
-          No audio ships without confirmed consent (OQ8 — pending). Shown instead: the masked
+          No audio ships without the caller's confirmed consent. Shown instead: the masked
           post-call record below, in the source docs' own masking convention
           (<code className="ledger-inline-code">+9193***7036</code>).
         </p>
@@ -285,7 +285,7 @@ export function AnnotatedTranscript({ recording }: { recording: Recording }) {
       ) : (
         <p className="ledger-annotated-transcript-gap">
           No turn-by-turn transcript or per-node margin marks have been authored for this call yet
-          — real annotations are pending the same consent gate as the audio (OQ8), not omitted.
+          — real annotations are pending the same consent gate as the audio, not omitted.
         </p>
       )}
 
@@ -322,7 +322,7 @@ export function PairedRecordings({
   if (recordings.length === 0) {
     return (
       <p className="ledger-annotated-transcript-gap">
-        No paired recordings are available in the compiled content pool.
+        No paired recordings are available to show yet.
       </p>
     );
   }

@@ -359,7 +359,7 @@ export const projects: Project[] = [
         {
           "id": "automjet-15",
           "kind": "visual",
-          "body": "**[PLACEHOLDER — pending Prashant, gated on OQ8]** Two real calls, one booked test ride and one cold lead, side by side with equal weight, each with its extracted post-call record beneath it. Until consent or confirmed test-call status clears, this renders masked transcript excerpts (numbers as `+9193***7036`, the source docs' own masking convention) instead of audio, `<audio>` controls never ship ahead of that confirmation.",
+          "body": "Two real calls, one booked test ride and one cold lead, side by side with equal weight, each with its extracted post-call record beneath it. The recordings themselves await the caller's confirmed consent before they ship; until then this renders the masked post-call record and the same honest framing (numbers as `+9193***7036`, the source docs' own masking convention) instead of audio — `<audio>` controls never ship ahead of that confirmation.",
           "visual": "paired-recordings",
           "source": "automjet/voice-agent.md primary sources note (recordings pending, OQ8)",
           "treatments": {
@@ -459,8 +459,7 @@ export const projects: Project[] = [
         "record": {
           "call_status": "test_drive_booked",
           "model_of_interest": "Rizta",
-          "purchase_timeline": "this_month",
-          "key_notes_for_followup": "[PENDING] Masked transcript excerpt renders here until consent/test-call status is confirmed (OQ8)."
+          "purchase_timeline": "this_month"
         },
         "caveat": "~500 calls/month: ~70% connect, ~40% complete, ~20% convert, ~20% end cold. This is one specific call, not the average — shown beside its cold-lead pair on purpose."
       },
@@ -469,8 +468,7 @@ export const projects: Project[] = [
         "record": {
           "call_status": "cold_lead",
           "model_of_interest": "undecided",
-          "purchase_timeline": "exploring",
-          "key_notes_for_followup": "[PENDING] Masked transcript excerpt renders here until consent/test-call status is confirmed (OQ8)."
+          "purchase_timeline": "exploring"
         },
         "caveat": "~500 calls/month: ~70% connect, ~40% complete, ~20% convert, ~20% end cold. A cold classification is a read outcome, not a failure — the ladder reached its honest end."
       }

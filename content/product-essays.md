@@ -273,7 +273,7 @@ Order: automjet-14, automjet-08, automjet-07, automjet-03, automjet-15, automjet
 ### BLOCK automjet-15 — The paired recordings, in transcript-fallback mode
 *kind: visual · source: automjet/voice-agent.md primary sources note (recordings pending, OQ8) · visual: paired-recordings*
 
-> **[PLACEHOLDER — pending Prashant, gated on OQ8]** Two real calls, one booked test ride and one cold lead, side by side with equal weight, each with its extracted post-call record beneath it. Until consent or confirmed test-call status clears, this renders masked transcript excerpts (numbers as `+9193***7036`, the source docs' own masking convention) instead of audio, `<audio>` controls never ship ahead of that confirmation.
+> Two real calls, one booked test ride and one cold lead, side by side with equal weight, each with its extracted post-call record beneath it. The recordings themselves await the caller's confirmed consent before they ship; until then this renders the masked post-call record and the same honest framing (numbers as `+9193***7036`, the source docs' own masking convention) instead of audio — `<audio>` controls never ship ahead of that confirmation.
 
 **Recruiter — depth: lead**
 > Listen to 20 seconds of either call (or read the masked transcript excerpt, until recordings clear). One booked a test ride. One didn't. Both are shown, on purpose.

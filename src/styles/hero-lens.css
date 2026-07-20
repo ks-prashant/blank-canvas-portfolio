@@ -81,6 +81,44 @@
 .ledger-hero-block {
   padding: 48px 0 72px;
 }
+/* Identity masthead — name + role + photo, above the counter-entry mark.
+   Answers "who is this" in the first viewport (the page had no name before). */
+.ledger-masthead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  margin-bottom: var(--space-48);
+}
+.ledger-masthead-avatar {
+  flex: none;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.02);
+  border: 1px solid var(--rule-strong);
+}
+.ledger-masthead-name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-28, 28px);
+  line-height: 1.1;
+  color: var(--ink);
+}
+.ledger-masthead-role {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+@media (max-width: 600px) {
+  .ledger-masthead-avatar {
+    width: 56px;
+    height: 56px;
+  }
+}
 .ledger-hero-mark {
   padding-bottom: var(--space-32);
 }

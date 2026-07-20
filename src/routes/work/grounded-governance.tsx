@@ -78,7 +78,7 @@ function GroundedGovernanceEssay() {
   if (!project?.essay) {
     return (
       <p className="ledger-artifact-missing">
-        Grounded Governance's build essay isn't available in the compiled content pool.
+        Grounded Governance's build essay isn't available yet.
       </p>
     );
   }

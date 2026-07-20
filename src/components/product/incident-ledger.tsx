@@ -29,7 +29,11 @@ interface IncidentRow {
   verified: string;
 }
 
-const NOT_ITEMIZED = "Not itemized in the compiled content pool.";
+// Two cells (gg-17's fix, gg-19's verification) genuinely aren't narrated as
+// a separate step anywhere in the source material — rather than fabricate
+// one, this says so plainly, in the same visitor-facing register as the rest
+// of the table, not as an internal build-pipeline note.
+const NOT_NARRATED = "Not narrated as a separate step in the build record.";
 
 const INCIDENT_SPLITS: Record<string, IncidentRow> = {
   "gg-16": {
@@ -41,20 +45,20 @@ const INCIDENT_SPLITS: Record<string, IncidentRow> = {
   "gg-17": {
     what: "`websearch_to_tsquery` was silently AND-ing every word, killing keyword retrieval for natural-language questions.",
     caught: "The retrieval eval, not a user.",
-    fix: NOT_ITEMIZED,
-    verified: NOT_ITEMIZED,
+    fix: NOT_NARRATED,
+    verified: "`evals/check_retrieval.mjs`, the reusable retrieval-eval script, re-run clean afterward — the same harness reruns against every later corpus expansion.",
   },
   "gg-18": {
     what: "The validation gate checked child citation-label uniqueness but not parent — a collision would have linked children to the wrong parent with zero errors raised, anywhere.",
     caught: "Tracing load logic end-to-end, before it ever fired.",
-    fix: NOT_ITEMIZED,
+    fix: "The missing parent-uniqueness check added, plus a defense-in-depth throw if it's ever violated again.",
     verified: "Confirmed via the same trace — never reached a live occurrence.",
   },
   "gg-19": {
     what: "Three malformed-tool-call crashes in one session, three different fields.",
     caught: "Surfaced directly as crashes during the session.",
     fix: "Stopped patching individual fields; wrapped the whole parse in a bounded retry instead.",
-    verified: NOT_ITEMIZED,
+    verified: NOT_NARRATED,
   },
   "gg-20": {
     what: "A live burst test of 10 rapid requests returned all 200s, no 429s — looked broken.",

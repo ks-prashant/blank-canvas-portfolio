@@ -1,0 +1,113 @@
+/* ================= SITE HEADER + FOOTER (shared chrome) =================
+   Rendered by LedgerShell on every page. See site-header.tsx / site-footer.tsx
+   for why they exist (interior pages were navigational dead ends). Colors,
+   spacing, and fonts all come from the design tokens in src/styles.css. */
+
+.ledger-site-header {
+  border-bottom: 1px solid var(--rule);
+}
+.ledger-site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+.ledger-site-header-mark {
+  font-family: var(--font-display);
+  font-size: var(--text-23);
+  line-height: 1;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ledger-site-header-mark:hover {
+  color: var(--red);
+}
+.ledger-site-header-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.ledger-site-header-nav a {
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  text-decoration: none;
+  /* >=44px touch target without shifting layout — padding grows the hit
+     area, the matching negative margin cancels its visual footprint. */
+  padding: 13px 0;
+  margin: -13px 0;
+}
+.ledger-site-header-nav a:hover {
+  color: var(--ink);
+}
+
+.ledger-site-footer {
+  border-top: 1px solid var(--rule);
+  margin-top: var(--space-64);
+}
+.ledger-site-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  flex-wrap: wrap;
+  padding-top: var(--space-24);
+  padding-bottom: var(--space-48);
+}
+.ledger-site-footer-id {
+  font-size: var(--text-15);
+  color: var(--ink-soft);
+}
+.ledger-site-footer-id a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.ledger-site-footer-id a:hover {
+  color: var(--red);
+}
+.ledger-site-footer-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+  flex-wrap: wrap;
+}
+.ledger-site-footer-nav a {
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--rule-strong);
+  padding: 13px 0;
+  margin: -13px 0;
+}
+.ledger-site-footer-nav a:hover {
+  color: var(--ink);
+  text-decoration-color: var(--ink);
+}
+
+@media (max-width: 600px) {
+  .ledger-site-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-12);
+  }
+  .ledger-site-header-nav {
+    justify-content: flex-start;
+    gap: var(--space-16);
+  }
+  .ledger-site-footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-16);
+  }
+}

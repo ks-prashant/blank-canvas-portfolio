@@ -600,16 +600,32 @@
 .ledger-contact-row {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 20px;
   flex-wrap: wrap;
   padding-top: 24px;
   border-top: 1px solid var(--ink);
+}
+.ledger-contact-avatar {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.02);
+  border: 1px solid var(--rule-strong);
 }
 .ledger-contact-line {
   font-size: 16px;
   color: var(--ink);
   flex: 1;
   min-width: 220px;
+}
+.ledger-contact-name {
+  font-family: var(--font-display);
+  font-size: var(--text-23);
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 4px;
 }
 .ledger-contact-actions {
   display: flex;

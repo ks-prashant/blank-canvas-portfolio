@@ -80,7 +80,7 @@ function AutomjetEssay() {
   if (!project?.essay) {
     return (
       <p className="ledger-artifact-missing">
-        Automjet's build essay isn't available in the compiled content pool.
+        Automjet's build essay isn't available yet.
       </p>
     );
   }
