@@ -72,6 +72,12 @@
 }
 .ledger-section-margin {
   padding-top: 4px;
+  /* Visual position only — DOM order is content-first (see section-
+     heading.tsx) so a screen reader reaches the section's real content
+     before this decorative/supplementary side note. `order` re-sequences
+     the grid's visual layout independent of DOM/reading order, so sighted
+     users still see the margin column on the left, unchanged. */
+  order: -1;
 }
 @media (max-width: 860px) {
   .ledger-section-margin {

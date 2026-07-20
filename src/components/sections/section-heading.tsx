@@ -46,13 +46,23 @@ export function SectionGrid({
   children: ReactNode;
 }) {
   return (
+    // DOM order is content-then-margin-note (`.ledger-section-content` first
+    // in markup), so a screen reader reaches each section's actual heading
+    // and content before the side annotation — not all margin notes are
+    // purely decorative (journey's and work's carry real framing, not just
+    // a color-convention explainer), so hiding them outright would remove
+    // real information rather than just fix ordering. The margin column
+    // still renders visually first for sighted users via CSS Grid's `order`
+    // (see `.ledger-section-margin` in landing-sections.css) — visual and
+    // reading order are independent in CSS Grid, so this fixes "the
+    // annotation interrupts before the content" without losing content.
     <div className="ledger-section-grid">
+      <div className="ledger-section-content">{children}</div>
       <div className="ledger-section-margin">
         {marginNote ? (
           <div className={`ledger-margin-note${marginNoteCost ? " cost" : ""}`}>{marginNote}</div>
         ) : null}
       </div>
-      <div className="ledger-section-content">{children}</div>
     </div>
   );
 }

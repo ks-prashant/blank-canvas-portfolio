@@ -493,7 +493,7 @@ export const projects: Project[] = [
     "name": "Grounded Governance",
     "org": "personal",
     "confidential": false,
-    "status": "Live, pact-wise-guide.lovable.app",
+    "status": "Live, source-cited across 5 governance frameworks — refuses rather than fabricates.",
     "metrics": [
       {
         "label": "Retrieval gate (GDPR slice)",

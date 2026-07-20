@@ -588,7 +588,7 @@ const PROJECT_META: ProjectMeta[] = [
     name: 'Grounded Governance',
     org: 'personal',
     confidential: false,
-    status: 'Live, pact-wise-guide.lovable.app',
+    status: 'Live, source-cited across 5 governance frameworks — refuses rather than fabricates.',
     metrics: [
       { label: 'Retrieval gate (GDPR slice)', value: '7/7', method: 'Direct-lookup + adversarial retrieval eval', sourceLabel: 'instrumented' },
       { label: 'Groundedness (first full run)', value: '93.3% vs 95% target', method: '24-item GDPR gate, interim Sonnet-5 generation config', sourceLabel: 'disclosed-gap', caveat: 'Interim config, not the final comprehensive re-run; certifies the interim setup only.' },
