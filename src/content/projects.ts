@@ -461,7 +461,7 @@ export const projects: Project[] = [
           "model_of_interest": "Rizta",
           "purchase_timeline": "this_month"
         },
-        "caveat": "~500 calls/month: ~70% connect, ~40% complete, ~20% convert, ~20% end cold. This is one specific call, not the average — shown beside its cold-lead pair on purpose."
+        "caveat": "This is one specific call, not the average — shown beside its cold-lead pair on purpose."
       },
       {
         "label": "Cold lead",
@@ -470,7 +470,7 @@ export const projects: Project[] = [
           "model_of_interest": "undecided",
           "purchase_timeline": "exploring"
         },
-        "caveat": "~500 calls/month: ~70% connect, ~40% complete, ~20% convert, ~20% end cold. A cold classification is a read outcome, not a failure — the ladder reached its honest end."
+        "caveat": "A cold classification is a read outcome, not a failure — the ladder reached its honest end."
       }
     ],
     "lenses": {

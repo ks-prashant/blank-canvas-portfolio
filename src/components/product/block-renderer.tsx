@@ -196,6 +196,16 @@ export function BlockRenderer({
   const renderedVisuals = new Set<string>();
   let decisionCounter = 0;
   let i = 0;
+  // Consecutive blocks sometimes carry byte-identical receipt text (e.g.
+  // several "decision" blocks in a row whose treatment is generically "a
+  // decision with a stated cost" — nothing new to learn by opening the
+  // second one right after the first). Suppressing an exact repeat of the
+  // immediately preceding rendered receipt keeps the mechanic — every block
+  // still explains itself the first time a given reason appears — without
+  // it becoming a repeated toggle a reader learns to ignore. Only exact
+  // matches are suppressed, never a heuristic/fuzzy one, so a genuinely
+  // different receipt is never accidentally hidden.
+  let previousReceipt: string | undefined;
 
   while (i < composed.length) {
     const { block, treatment } = composed[i];
@@ -226,11 +236,14 @@ export function BlockRenderer({
     const skipVisual = block.visual ? renderedVisuals.has(block.visual) : false;
     if (block.visual) renderedVisuals.add(block.visual);
 
+    const receiptIsRepeat = treatment.receipt !== undefined && treatment.receipt === previousReceipt;
+    if (treatment.receipt !== undefined) previousReceipt = treatment.receipt;
+
     elements.push(
       <BlockSection
         block={block}
         slug={slug}
-        receipt={treatment.receipt}
+        receipt={receiptIsRepeat ? undefined : treatment.receipt}
         bodyOverride={treatment.variant}
         decisionNumber={block.kind === "decision" ? decisionCounter : undefined}
         metrics={metrics}
