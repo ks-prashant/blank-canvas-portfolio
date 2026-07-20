@@ -205,13 +205,14 @@
 .ledger-lens-receipt {
   margin-top: var(--space-12);
 }
+/* Quiet footnote, not a banner (task #4): lowercase, small, understated — a
+   reader who wants the rationale can open it; everyone else reads past it. */
 .ledger-lens-receipt-summary {
   cursor: pointer;
   list-style: none;
-  font-family: var(--font-mono);
-  font-size: var(--text-10_5);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: var(--text-12);
+  font-style: italic;
   color: var(--ink-faint);
   text-decoration: underline dotted;
   text-underline-offset: 3px;

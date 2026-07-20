@@ -1,5 +1,4 @@
 import { Prose } from "../../components/prose";
-import { LensReceipt } from "../lens/lens-receipt";
 import { UnlensedMark } from "../lens/unlensed-mark";
 import { EvalScore } from "../product/eval-score";
 import type { CaseSection, Metric } from "../../content/types";
@@ -43,35 +42,13 @@ const SECTION_LABELS: Record<CaseSection["kind"], string> = {
   roadmap: "Roadmap",
 };
 
-// The "why this lens shows this" reason has two independent parts: what
-// this *kind* of section is for (constant across lenses), and how much
-// of it this lens gets (its `depth`). Combining the two gives an honest,
-// non-invented receipt without needing a per-lens `receipt` field that
-// `CaseSection` (§7.2) deliberately doesn't have — case-page depth is the
-// mechanism, and the receipt just narrates that mechanism, same content
-// layer boundary as everywhere else on this page.
-const KIND_REASON: Record<CaseSection["kind"], string> = {
-  problem: "what the reader needs before anything else",
-  discovery: "how the problem was actually found, not just stated",
-  decision: "the fork that was chosen, and why",
-  approach: "how it actually works",
-  fixOrder: "the order fixes were applied, ranked by impact",
-  metrics: "the numbers, with as much method as this lens needs to trust them",
-  guardrail: "the safeguard that kept a win from hiding a regression",
-  didntShip: "what didn't make it, and why",
-  notUsed: "what was deliberately left out",
-  eval: "how success was actually measured",
-  roadmap: "what's still ahead",
-};
-
-const DEPTH_PHRASE: Record<"short" | "full", string> = {
-  full: "This lens gets it in full",
-  short: "This lens gets the short version",
-};
-
-function receiptFor(kind: CaseSection["kind"], depth: "short" | "full"): string {
-  return `${DEPTH_PHRASE[depth]} — ${KIND_REASON[kind]}.`;
-}
+// Task #4 (receipt demotion): the per-section "why you're seeing this"
+// receipt was removed here. A case page renders up to ~11 sections, so one
+// receipt per section read as pure repetition — and it was redundant with
+// the `CaseHonestyFooter` at the foot of every case page, which already
+// states the page-level "here's what the other lenses add." The depth
+// mechanism is still visible (sections appear/disappear/re-depth by lens);
+// it just no longer narrates itself on every single section.
 
 export function CaseSections({
   sections,
@@ -88,8 +65,8 @@ export function CaseSections({
   if (visible.length === 0) {
     return (
       <p className="ledger-case-section-empty">
-        This lens has nothing further to add beyond the summary above — that's stated plainly rather than
-        padded out.
+        This lens has nothing further to add beyond the summary above — that's stated plainly rather
+        than padded out.
       </p>
     );
   }
@@ -108,7 +85,6 @@ export function CaseSections({
               <UnlensedMark />
             </div>
           ) : null}
-          <LensReceipt>{receiptFor(section.kind, section.depth as "short" | "full")}</LensReceipt>
         </section>
       ))}
     </div>

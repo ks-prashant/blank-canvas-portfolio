@@ -109,9 +109,12 @@ function VisualFor({
       return <PairedRecordings recordings={recordings ?? []} metrics={metrics} />;
     case "eval-score": {
       const evalMetrics = metrics.filter((m) =>
-        ["Retrieval gate (GDPR slice)", "Groundedness (first full run)", "Correct-refusal (first full run)", "Citation accuracy (first full run)"].includes(
-          m.label,
-        ),
+        [
+          "Retrieval gate (GDPR slice)",
+          "Groundedness (first full run)",
+          "Correct-refusal (first full run)",
+          "Citation accuracy (first full run)",
+        ].includes(m.label),
       );
       return <EvalScore metrics={evalMetrics} />;
     }
@@ -196,16 +199,16 @@ export function BlockRenderer({
   const renderedVisuals = new Set<string>();
   let decisionCounter = 0;
   let i = 0;
-  // Consecutive blocks sometimes carry byte-identical receipt text (e.g.
-  // several "decision" blocks in a row whose treatment is generically "a
-  // decision with a stated cost" — nothing new to learn by opening the
-  // second one right after the first). Suppressing an exact repeat of the
-  // immediately preceding rendered receipt keeps the mechanic — every block
-  // still explains itself the first time a given reason appears — without
-  // it becoming a repeated toggle a reader learns to ignore. Only exact
-  // matches are suppressed, never a heuristic/fuzzy one, so a genuinely
-  // different receipt is never accidentally hidden.
-  let previousReceipt: string | undefined;
+  // Task #4 (receipt demotion): show the "why you're seeing this" receipt at
+  // most ONCE per page — on the first block that carries one — instead of
+  // after nearly every block, which read as repeated noise (~10 per engineer
+  // page). The prominent genre framing (ArtifactFrame: "a design review +
+  // incident log …") already signals *why this shape*, and the header lens
+  // pill offers the switch, so one quiet receipt is enough to demonstrate the
+  // personalization-with-receipts mechanic without hammering it. This
+  // deliberately relaxes §8.6's original "every adapted block carries a mark"
+  // — spec updated to match.
+  let receiptShown = false;
 
   while (i < composed.length) {
     const { block, treatment } = composed[i];
@@ -236,14 +239,15 @@ export function BlockRenderer({
     const skipVisual = block.visual ? renderedVisuals.has(block.visual) : false;
     if (block.visual) renderedVisuals.add(block.visual);
 
-    const receiptIsRepeat = treatment.receipt !== undefined && treatment.receipt === previousReceipt;
-    if (treatment.receipt !== undefined) previousReceipt = treatment.receipt;
+    // Only the first block that has a receipt renders one (see note above).
+    const receipt = receiptShown ? undefined : treatment.receipt;
+    if (receipt !== undefined) receiptShown = true;
 
     elements.push(
       <BlockSection
         block={block}
         slug={slug}
-        receipt={receiptIsRepeat ? undefined : treatment.receipt}
+        receipt={receipt}
         bodyOverride={treatment.variant}
         decisionNumber={block.kind === "decision" ? decisionCounter : undefined}
         metrics={metrics}

@@ -213,7 +213,7 @@ Design language originates from the *logic* of Prashant's own build documents (b
 | C7 | `EvalScore` | A metric vs. its target, honest status | Renders FAIL states plainly (93.3% vs 95 ✗) — the failing first run is content, not shame |
 | C8 | `LensSignature` | The per-lens landing visual | Three variants: `EvidenceLadder` (recruiter), `DecisionLedger` (founder), `StructureBoard` (engineer — 3 rows, third row is this site). Only the active lens's renders |
 | C9 | `HeroCounterEntry` | The hero mark: ~12 paired marks, ink above the baseline (bought) / red below (cost), heights varying | Fills once on load, posts don't fade; `prefers-reduced-motion` renders final state. Caption: the D9 thesis line |
-| C22 | `LensReceipt` | The "why you're seeing this" margin mark on any lens-adapted block | Opens a one-sentence rationale (§8.6). Mirrors GG's "why this applies to your system" |
+| C22 | `LensReceipt` | The quiet "why you're seeing this" footnote — **one per page** (post-V1 review, task #4): the landing hero, the lead block of each product essay, and the case-page summary. Opens a one-sentence rationale (§8.6). Mirrors GG's "why this applies to your system" | Demoted from per-block to per-page and restyled from an all-caps mono banner to a lowercase footnote — repeating it after ~10 blocks read as noise; case pages already carry a page-level "what the other lenses add" honesty footer |
 | C23 | `UnlensedMark` | The "This block doesn't change by lens" marker | On the numbers table, evidence tags, and the documented "no" (§8.6) |
 | C10 | `LensPicker` | The three lens cards on the landing page | Persists selection; drives `LensPill` and every lensed block |
 | C11 | `LensPill` | Sticky "Reading as: X" indicator + menu | Global, always visible |
@@ -486,7 +486,7 @@ The original lens changed *prose*. That is rung 1 of a four-rung ladder, and it 
 |---|---|---|
 | **Per-lens argument** | Each lens gets its own section order, evidence set, and headline claim (§4.1's table) | GG's obligation map prioritized for *this* system |
 | **Per-lens signature visual** (`LensSignature`, C8) | Recruiter: the Evidence Ladder. Founder: the Decision Ledger. Engineer: the Structure Board — whose third row is this site | Each lens's currency of proof, drawn instead of asserted |
-| **Personalization with receipts** (`LensReceipt`, C22) | Every lens-adapted block carries a margin mark; opening it states *why this lens shows this* | GG's "why this applies to your system" rationale |
+| **Personalization with receipts** (`LensReceipt`, C22) | One quiet receipt per page states *why this lens shows this* | GG's "why this applies to your system" rationale |
 | **Blocks that refuse to personalize** (`UnlensedMark`, C23) | The numbers table, evidence tags, and the documented "no" render identically in all lenses, marked *"This block doesn't change by lens. The evidence is the evidence."* | GG's grounding fence — some things the model is never allowed to vary |
 | **The honest un-lensed default** (§4.1) | Before a lens is chosen: the humble generalist read, no silent pre-selection | Automjet's unknown-lead-source opening — never assume a warmer relationship than the data supports |
 

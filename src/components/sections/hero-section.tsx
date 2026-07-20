@@ -1,11 +1,15 @@
 import { heroCopy } from "../../content/lenses";
-import { unlensedHeroCopy, unlensedHeroSubline, heroReceipts } from "../../content/lens-picker-copy";
+import {
+  unlensedHeroCopy,
+  unlensedHeroSubline,
+  heroReceipts,
+} from "../../content/lens-picker-copy";
 import { useLens } from "../../content/lens-context";
 import { LensPicker } from "../../components/lens/lens-picker";
 import { LensReceipt } from "../../components/lens/lens-receipt";
 import { projects } from "../../content/projects";
 import { profile } from "../../content/site-copy";
-import type { Lens, Project } from "../../content/types";
+import type { Project } from "../../content/types";
 import { Prose } from "../../components/prose";
 
 /**
@@ -121,15 +125,21 @@ function HeroSubCopy() {
   if (!lens) {
     return (
       <div className="ledger-hero-subcopy">
-        <p><Prose text={unlensedHeroCopy} /></p>
-        <p className="ledger-hero-subcopy-clarify"><Prose text={unlensedHeroSubline} /></p>
+        <p>
+          <Prose text={unlensedHeroCopy} />
+        </p>
+        <p className="ledger-hero-subcopy-clarify">
+          <Prose text={unlensedHeroSubline} />
+        </p>
       </div>
     );
   }
 
   return (
     <div className="ledger-hero-subcopy">
-      <p><Prose text={heroCopy[lens]} /></p>
+      <p>
+        <Prose text={heroCopy[lens]} />
+      </p>
       <LensReceipt>{heroReceipts[lens]}</LensReceipt>
     </div>
   );
@@ -161,7 +171,10 @@ function LiveProductEntries() {
  * language metric line" — kept short by truncating real authored prose,
  * never by hand-typing a new line. */
 function leadSentences(text: string, maxSentences = 2, maxChars = 200): string {
-  const sentences = text.split(/(?<=[.!?])\s+/).slice(0, maxSentences).join(" ");
+  const sentences = text
+    .split(/(?<=[.!?])\s+/)
+    .slice(0, maxSentences)
+    .join(" ");
   if (sentences.length <= maxChars) return sentences;
   return `${sentences.slice(0, maxChars).trimEnd()}…`;
 }
@@ -169,18 +182,18 @@ function leadSentences(text: string, maxSentences = 2, maxChars = 200): string {
 function LiveProductEntry({ project }: { project: Project }) {
   const { lens } = useLens();
   const line = lens ? leadSentences(project.lenses[lens].summary) : project.status;
-  const receipt = lens
-    ? project.essay?.blocks.find((b) => b.id === `${project.slug}-01`)?.treatments[lens as Lens]
-        ?.receipt
-    : undefined;
 
+  // No per-entry LensReceipt here (task #4): the landing keeps a single quiet
+  // receipt, on the hero sub-copy — the place the lens re-composition is most
+  // visible — rather than repeating one under each live-product row too.
   return (
     <div className="ledger-live-entry">
       <span className="ledger-live-dot" aria-hidden />
       <div className="ledger-live-entry-body">
         <p className="ledger-live-entry-name">{project.name}</p>
-        <p className="ledger-live-entry-line"><Prose text={line} /></p>
-        {receipt ? <LensReceipt>{receipt}</LensReceipt> : null}
+        <p className="ledger-live-entry-line">
+          <Prose text={line} />
+        </p>
         <div className="ledger-live-entry-links">
           <a className="ledger-live-entry-link" href={`/work/${project.slug}`}>
             Open the build →
