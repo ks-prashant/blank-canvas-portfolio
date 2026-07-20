@@ -1,0 +1,383 @@
+/*
+ * BUILD-SPEC.md §8.5 — the six Tier-2 employer case pages (`/case/$slug`).
+ * Same convention as `product-essay.css`/`hero-lens.css`: kept out of
+ * `src/styles.css`, loaded via a side-effect import from the route file,
+ * `ledger-` class prefix, tokens only — never a hardcoded hex. Rules, not
+ * cards; no `rounded-lg`/`rounded-xl` anywhere (§5.4).
+ *
+ * This is a simpler page shape than the two product-essay pages
+ * (`product-essay.css`) — no genres, no incident ledgers — so it gets its
+ * own small stylesheet rather than growing that one. `LensReceipt`/
+ * `UnlensedMark`/`EvalScore`/`LensPill` styling still lives in
+ * `hero-lens.css`/`product-essay.css` and is reused unchanged; this file
+ * only adds what's genuinely new to the case-page frame.
+ */
+
+/* ================= CaseHeader ================= */
+.ledger-case-header {
+  padding: var(--space-48) 0 var(--space-24);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: var(--space-32);
+}
+.ledger-case-org {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-12);
+}
+.ledger-case-title {
+  font-family: var(--font-display);
+  font-size: var(--text-40);
+  line-height: 1.05;
+  color: var(--ink);
+}
+.ledger-case-status {
+  margin-top: var(--space-8);
+  font-size: var(--text-15);
+  color: var(--ink-soft);
+}
+
+/* ================= CaseSummary ================= */
+.ledger-case-summary {
+  margin-bottom: var(--space-32);
+}
+.ledger-case-summary-body {
+  font-size: var(--text-19);
+  line-height: 1.55;
+  max-width: 68ch;
+  color: var(--ink);
+}
+
+/* ================= CaseSignatureVisual ================= */
+.ledger-case-signature {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: var(--space-24) 0;
+  margin: var(--space-32) 0;
+}
+.ledger-case-signature-body {
+  overflow-x: auto;
+}
+.ledger-case-signature-caption {
+  margin-top: var(--space-16);
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+}
+
+/* Go/no-go matrix (voice-screening) */
+.ledger-gonogo-matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-13_5);
+}
+.ledger-gonogo-matrix th,
+.ledger-gonogo-matrix td {
+  text-align: left;
+  padding: var(--space-8) var(--space-16) var(--space-8) 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.ledger-gonogo-matrix th {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+.ledger-gonogo-verdict {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+.ledger-gonogo-matrix tr.is-go .ledger-gonogo-verdict {
+  color: var(--ink);
+}
+.ledger-gonogo-matrix tr.is-nogo .ledger-gonogo-verdict {
+  color: var(--red);
+}
+
+/* Decline-then-recovery line (resume-shortlisting) */
+.ledger-decline-line {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-32);
+  padding: var(--space-8) 0;
+}
+.ledger-decline-point {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 2px solid var(--ink);
+  padding-top: var(--space-8);
+}
+.ledger-decline-point.is-low {
+  border-top-color: var(--red);
+}
+.ledger-decline-value {
+  font-family: var(--font-display);
+  font-size: var(--text-28);
+  color: var(--ink);
+}
+.ledger-decline-point.is-low .ledger-decline-value {
+  color: var(--red);
+}
+.ledger-decline-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* Timeline + fix ladder (drip-campaign) */
+.ledger-timeline-ladder {
+  display: grid;
+  gap: var(--space-24);
+}
+.ledger-mini-timeline {
+  display: flex;
+  gap: var(--space-24);
+}
+.ledger-mini-timeline li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: var(--space-16);
+  border-left: 2px solid var(--rule-strong);
+}
+.ledger-mini-timeline-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.ledger-mini-timeline-detail {
+  font-size: var(--text-12);
+  color: var(--ink-soft);
+}
+.ledger-fix-ladder {
+  display: grid;
+  gap: var(--space-8);
+}
+.ledger-fix-ladder li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-12);
+  padding: var(--space-8) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.ledger-fix-rank {
+  font-family: var(--font-mono);
+  color: var(--ink-faint);
+}
+.ledger-fix-body {
+  flex: 1;
+  font-size: var(--text-13_5);
+}
+.ledger-fix-tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--red);
+  white-space: nowrap;
+}
+.ledger-fix-ladder li.is-highest-impact {
+  border-bottom: 1px solid var(--ink);
+}
+
+/* KYC before/after (lending) */
+.ledger-kyc-before-after {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+@media (max-width: 640px) {
+  .ledger-kyc-before-after {
+    grid-template-columns: 1fr;
+  }
+}
+.ledger-kyc-col {
+  border: 1px solid var(--rule);
+  padding: var(--space-16);
+}
+.ledger-kyc-col.is-after {
+  border-color: var(--ink);
+}
+.ledger-kyc-col-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  margin-bottom: var(--space-8);
+}
+.ledger-kyc-col ul {
+  display: grid;
+  gap: 6px;
+  font-size: var(--text-13);
+  list-style: none;
+  padding: 0;
+}
+.ledger-kyc-arrow {
+  font-size: var(--text-21);
+  color: var(--ink-faint);
+  align-self: center;
+}
+
+/* Earn-on-delivery loop (cashback-builder) */
+.ledger-loop-diagram {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8);
+  list-style: none;
+  padding: 0;
+  font-size: var(--text-13_5);
+}
+.ledger-loop-diagram li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  border: 1px solid var(--rule);
+  padding: var(--space-8) var(--space-12);
+}
+.ledger-loop-diagram li:not(:last-child)::after {
+  content: "→";
+  margin-left: var(--space-8);
+  color: var(--ink-faint);
+}
+.ledger-loop-step-num {
+  font-family: var(--font-mono);
+  color: var(--ink-faint);
+}
+.ledger-loop-wrap {
+  border: none !important;
+}
+.ledger-loop-wrap::after {
+  content: "" !important;
+}
+.ledger-loop-wrap-arrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* Cost-ascending waterfall x 3 segments (pii-waterfall) */
+.ledger-cost-waterfall {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-24);
+}
+@media (max-width: 640px) {
+  .ledger-cost-waterfall {
+    grid-template-columns: 1fr;
+  }
+}
+.ledger-waterfall-col-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-10_5);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  margin-bottom: var(--space-8);
+}
+.ledger-waterfall-col ol {
+  display: grid;
+  gap: 6px;
+  font-size: var(--text-12_5, var(--text-13));
+  list-style: none;
+  padding: 0;
+}
+.ledger-waterfall-col li {
+  border-left: 2px solid var(--rule-strong);
+  padding-left: var(--space-8);
+}
+.ledger-waterfall-note {
+  grid-column: 1 / -1;
+  font-size: var(--text-12);
+  color: var(--ink-soft);
+  margin-top: var(--space-8);
+}
+
+/* ================= CaseSections ================= */
+.ledger-case-sections {
+  display: grid;
+  gap: var(--space-32);
+}
+.ledger-case-section {
+  padding-bottom: var(--space-24);
+  border-bottom: 1px solid var(--rule);
+}
+.ledger-case-section-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-21);
+  color: var(--ink);
+  margin-bottom: var(--space-8);
+}
+.ledger-case-section-body {
+  font-size: var(--text-15);
+  line-height: 1.6;
+  max-width: 68ch;
+  color: var(--ink);
+}
+.ledger-case-section-empty {
+  font-size: var(--text-15);
+  font-style: italic;
+  color: var(--ink-soft);
+  padding: var(--space-24) 0;
+}
+.ledger-case-metrics-table {
+  margin-top: var(--space-16);
+  display: grid;
+  gap: var(--space-8);
+}
+
+/* ================= CaseHonestyFooter ================= */
+.ledger-case-honesty-footer {
+  margin-top: var(--space-48);
+  padding-top: var(--space-24);
+  border-top: 1px solid var(--rule-strong);
+}
+.ledger-case-honesty-lead {
+  font-size: var(--text-13_5);
+  color: var(--ink-soft);
+  margin-bottom: var(--space-16);
+}
+.ledger-case-honesty-list {
+  display: grid;
+  gap: var(--space-12);
+  list-style: none;
+  padding: 0;
+}
+.ledger-case-honesty-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-12);
+}
+.ledger-case-honesty-switch {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.ledger-case-honesty-adds {
+  font-size: var(--text-12);
+  color: var(--ink-faint);
+}

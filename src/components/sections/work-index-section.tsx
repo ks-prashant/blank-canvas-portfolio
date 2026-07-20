@@ -8,10 +8,11 @@ import { SectionGrid, SectionHeading } from "./section-heading";
  * build; roster re-sourced from `src/content/projects.ts` (the compiled
  * pipeline, §7.4) instead of the prototype's hardcoded WORK array.
  *
- * Tier 1/2 rows render as plain (non-anchor) list items for now: `/work/
- * $slug` and `/case/$slug` routes don't exist until Steps 6-7, and a CTA
- * that leads nowhere is exactly the "small lie" §7.4 warns against — so
- * no link, no CTA mark, until those routes land. Tier 3 gets one line,
+ * Tier 1/2 rows now link to real routes (Step 7): Tier 1 (`automjet`,
+ * `grounded-governance`) to their `/work/$slug` build-essay pages, Tier 2
+ * (the six case studies) to `/case/$slug`. Both route sets exist as of
+ * this step, so the "a CTA that leads nowhere is a small lie" (§7.4)
+ * concern from Steps 4-6 no longer applies. Tier 3 still gets one line,
  * no page, no CTA, by design (never a regression, since it never had one).
  *
  * The one-liner shown for tier 1/2 rows is each project's `status` field —
@@ -67,18 +68,34 @@ export function WorkIndexSection() {
                 <div className="ledger-org-head">{group.label}</div>
                 {items.map((project) => {
                   const tier = tierOf(project);
+                  const href =
+                    tier === 1
+                      ? `/work/${project.slug}`
+                      : tier === 2
+                        ? `/case/${project.slug}`
+                        : undefined;
                   const rowClass =
                     tier === 1
-                      ? "ledger-work-row ledger-work-row--t1 ledger-work-row--nolink"
+                      ? "ledger-work-row ledger-work-row--t1"
                       : tier === 3
                         ? "ledger-work-row ledger-work-row--t3 ledger-work-row--nolink"
-                        : "ledger-work-row ledger-work-row--nolink";
-                  return (
-                    <div className={rowClass} key={project.slug}>
-                      <span className="ledger-wr-main">
-                        <span className="ledger-work-title">{project.name}</span>
-                        <span className="ledger-work-oneliner">{project.status}</span>
+                        : "ledger-work-row";
+                  const rowContent = (
+                    <span className="ledger-wr-main">
+                      <span className="ledger-work-title">{project.name}</span>
+                      <span className="ledger-work-oneliner">{project.status}</span>
+                    </span>
+                  );
+                  return href ? (
+                    <a className={rowClass} href={href} key={project.slug}>
+                      {rowContent}
+                      <span className="ledger-cta-mark">
+                        {tier === 1 ? "Open the build →" : "Read the case →"}
                       </span>
+                    </a>
+                  ) : (
+                    <div className={rowClass} key={project.slug}>
+                      {rowContent}
                     </div>
                   );
                 })}

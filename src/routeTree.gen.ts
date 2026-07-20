@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WorkGroundedGovernanceRouteImport } from './routes/work/grounded-governance'
 import { Route as WorkAutomjetRouteImport } from './routes/work/automjet'
+import { Route as CaseSlugRouteImport } from './routes/case/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,33 +29,51 @@ const WorkAutomjetRoute = WorkAutomjetRouteImport.update({
   path: '/work/automjet',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaseSlugRoute = CaseSlugRouteImport.update({
+  id: '/case/$slug',
+  path: '/case/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/case/$slug': typeof CaseSlugRoute
   '/work/automjet': typeof WorkAutomjetRoute
   '/work/grounded-governance': typeof WorkGroundedGovernanceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/case/$slug': typeof CaseSlugRoute
   '/work/automjet': typeof WorkAutomjetRoute
   '/work/grounded-governance': typeof WorkGroundedGovernanceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/case/$slug': typeof CaseSlugRoute
   '/work/automjet': typeof WorkAutomjetRoute
   '/work/grounded-governance': typeof WorkGroundedGovernanceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/work/automjet' | '/work/grounded-governance'
+  fullPaths:
+    | '/'
+    | '/case/$slug'
+    | '/work/automjet'
+    | '/work/grounded-governance'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/work/automjet' | '/work/grounded-governance'
-  id: '__root__' | '/' | '/work/automjet' | '/work/grounded-governance'
+  to: '/' | '/case/$slug' | '/work/automjet' | '/work/grounded-governance'
+  id:
+    | '__root__'
+    | '/'
+    | '/case/$slug'
+    | '/work/automjet'
+    | '/work/grounded-governance'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CaseSlugRoute: typeof CaseSlugRoute
   WorkAutomjetRoute: typeof WorkAutomjetRoute
   WorkGroundedGovernanceRoute: typeof WorkGroundedGovernanceRoute
 }
@@ -82,11 +101,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkAutomjetRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case/$slug': {
+      id: '/case/$slug'
+      path: '/case/$slug'
+      fullPath: '/case/$slug'
+      preLoaderRoute: typeof CaseSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CaseSlugRoute: CaseSlugRoute,
   WorkAutomjetRoute: WorkAutomjetRoute,
   WorkGroundedGovernanceRoute: WorkGroundedGovernanceRoute,
 }
