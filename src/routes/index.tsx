@@ -9,7 +9,7 @@ import { NumbersSection } from "../components/sections/numbers-section";
 import { PrinciplesSection } from "../components/sections/principles-section";
 import { QuestionsSection } from "../components/sections/questions-section";
 import { WorkIndexSection } from "../components/sections/work-index-section";
-import { LensProvider } from "../content/lens-context";
+import { LensProvider, validateLensSearch } from "../content/lens-context";
 // Side-effect import: new CSS for the six sections below, deliberately
 // NOT folded into src/styles.css (off-limits for BUILD-SPEC §11 Step 4 —
 // see landing-sections.css's header comment for why).
@@ -23,6 +23,7 @@ import "../styles/hero-lens.css";
 // project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
+  validateSearch: validateLensSearch,
 });
 
 // BUILD-SPEC §11 Step 5: the new hero + deepened lens, assembled above the
@@ -37,8 +38,9 @@ export const Route = createFileRoute("/")({
 // same pattern the prototype uses, where every `<section>` repeats its
 // own two-column `.grid` rather than sharing one page-level split.
 function Index() {
+  const { lens } = Route.useSearch();
   return (
-    <LensProvider>
+    <LensProvider initialLens={lens ?? null}>
       <LedgerShell>
         <LensPill />
         <HeroSection />

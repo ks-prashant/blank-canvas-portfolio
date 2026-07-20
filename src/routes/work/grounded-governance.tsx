@@ -6,7 +6,7 @@ import { LensPill } from "../../components/lens/lens-pill";
 import { ArtifactFrame } from "../../components/product/artifact-frame";
 import { BlockRenderer } from "../../components/product/block-renderer";
 import { Prose } from "../../components/prose";
-import { LENS_LABELS, LensProvider, useLens } from "../../content/lens-context";
+import { LENS_LABELS, LensProvider, useLens, validateLensSearch } from "../../content/lens-context";
 import { composeArtifact, findQuoteBlock } from "../../content/product-essay";
 import { projects } from "../../content/projects";
 import "../../styles/product-essay.css";
@@ -27,6 +27,7 @@ import "../../styles/product-essay.css";
  */
 export const Route = createFileRoute("/work/grounded-governance")({
   component: GroundedGovernancePage,
+  validateSearch: validateLensSearch,
   head: () => ({
     meta: [
       { title: "Grounded Governance — Prashant Singh" },
@@ -40,8 +41,9 @@ export const Route = createFileRoute("/work/grounded-governance")({
 });
 
 function GroundedGovernancePage() {
+  const { lens } = Route.useSearch();
   return (
-    <LensProvider>
+    <LensProvider initialLens={lens ?? null}>
       <LedgerShell>
         <LensPill />
         <GroundedGovernanceEssay />
